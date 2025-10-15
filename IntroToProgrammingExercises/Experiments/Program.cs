@@ -1,7 +1,31 @@
 ﻿
 using System.Diagnostics.CodeAnalysis;
 
-void Print(string name, int? count)
+int[]? numbers = new int[5];//arrays are fixed size youo cannot append
+numbers.Append(6);
+for(int i=0;i<numbers.Length;i++)
+{
+    Console.WriteLine(numbers[i]);
+}
+
+List<int> grades = new List<int>(5) { 0,0,0,0};//•	The 5 is for performance (pre-allocating space), not a limit.
+grades.Add(90);
+
+
+
+for(int i=0;i<grades.Count;i++)
+{
+    Console.WriteLine(grades[i]);
+}
+
+foreach(var item in grades) //foreach for this syntax
+{
+    Console.WriteLine(item);
+}
+
+
+
+void Print(string? name, int? count)
 {
     if (name is null)
     {
@@ -33,6 +57,7 @@ public class Person
         Name = name;
     }
 }
+
 
 
 
