@@ -1,4 +1,8 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+
+string? name = null;
+//Console.Write($"name: {name.Length}");
 
 int age;
 char gender;
@@ -37,5 +41,3 @@ switch (num)
         break;
 
 }
-
-
