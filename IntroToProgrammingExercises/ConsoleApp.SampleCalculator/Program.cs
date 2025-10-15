@@ -2,6 +2,7 @@
 //variable decalration
 
 using System.Linq.Expressions;
+using System.Numerics;
 
 int choice = 0, num1=0,num2=0;
 
@@ -10,12 +11,7 @@ while (choice != -1)
 {
     try
     {
-        Console.WriteLine("Please select -1 to exist");
-        Console.WriteLine("Please enter the operation");
-        Console.WriteLine("1. Add");
-        Console.WriteLine("2. Subtract");
-        Console.WriteLine("3. Multiply");
-        Console.WriteLine("4. Substr");
+        PrintMenu();
         choice = Convert.ToInt32(Console.ReadLine());
 
         if (choice == -1)
@@ -34,12 +30,12 @@ while (choice != -1)
         {
             case 1:
                 {
-                    answer = num1 + num2;
+                    answer = AddNumbers( num1 ,num2);
                     break;
                 }
             case 2:
                 {
-                    answer = num1 - num2;
+                    answer = Substract(num1, num2);
                     break;
                 }
             case 3:
@@ -79,6 +75,19 @@ while (choice != -1)
         Console.Clear();
     }
 
+}
+
+int Substract(int num1, int num2)=>num1 - num2;
+int AddNumbers(int num1, int num2) => num1 + num2;
+
+void PrintMenu()
+{
+    Console.WriteLine("Please select -1 to exist");
+    Console.WriteLine("Please enter the operation");
+    Console.WriteLine("1. Add");
+    Console.WriteLine("2. Subtract");
+    Console.WriteLine("3. Multiply");
+    Console.WriteLine("4. Substr");
 }
 
 Console.WriteLine("end, thanks");
