@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Cafe.Domain.Events;
 namespace Cafe.Application;
 
-internal class SimpleOrderEventPublisher : IOrderEventPublisher
+public class SimpleOrderEventPublisher : IOrderEventPublisher
 {
     private List<IOrderEventSubscriber> subscribers = new();
 
