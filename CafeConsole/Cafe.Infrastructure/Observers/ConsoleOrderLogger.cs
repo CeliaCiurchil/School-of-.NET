@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Cafe.Domain.Events;
 namespace Cafe.Infrastructure.Observers;
 
-internal class ConsoleOrderLogger : IOrderEventSubscriber
+public class ConsoleOrderLogger : IOrderEventSubscriber
 {
     public void On(OrderPlaced evt)
     {
