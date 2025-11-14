@@ -9,56 +9,24 @@ using System.Threading.Tasks;
 using Cafe.Infrastructure.Factories;
 namespace Cafe.CLI.Menus;
 
-static class Menu
+public sealed class Menu
 {
-    public static void ShowMainMenu()
-    {
-        Console.Clear();
-        Console.WriteLine("Welcome to Cafe Console CLI");
-    }
-    public static void ShowBeverageMenu()
-    {
-        Console.WriteLine("Choose a base beverage:");
-        foreach (var beverage in Enum.GetValues<BeverageType>())
-        {
-            Console.WriteLine($"- {beverage}");
-        }
-        Console.Write("Enter beverage name: ");
-    }
-    public static void Run()
-    {
-        int option = 1;
-        while (option != 0)
-        {
-            try
-            {
-                ShowMainMenu();
-                ShowBeverageMenu();
-                ChooseBaseBeverages();
-                
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Press any key to continue");
-                Console.ReadKey(true);
-                Console.Clear();
-            }
-        }
-    }
+    private readonly OrderMenu orderMenu;
+    public Menu(OrderMenu orderMenu) => this.orderMenu = orderMenu;
 
-    private static void ChooseBaseBeverages()
+    public void Run()
     {
-        BeverageType beverageType;
-
-        if (!Enum.TryParse(Console.ReadLine(),true, out beverageType))
+        while (true)
         {
-            Console.WriteLine("Invalid input. Please enter a beverage type from the list.");
+            Console.Clear();
+            Console.WriteLine("Welcome to Cafe\n");
+
+            orderMenu.PlaceOrder();
+
+            Console.WriteLine("\nPress 1 to EXIT, or any other key to place another order...");
+
+            var input = Console.ReadLine();
+            if (!string.IsNullOrEmpty(input) && input.Trim().Equals("1")) return;
         }
-        OrderService orderService = new(new BeverageFactory());
-        orderService.ChooseBase(beverageType);
     }
 }
