@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cafe.Domain.Pricing
 {
-    internal class HappyHourPricing : IPricingStrategy
+    public class HappyHourPricing : IPricingStrategy
     {
         private const decimal DiscountRate = 0.20m;
         public decimal Apply(decimal subtotal)
