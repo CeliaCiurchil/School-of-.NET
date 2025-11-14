@@ -24,7 +24,7 @@ namespace Cafe.Domain.Beverages.Decorators
 
         public override string Describe()
         {
-            return $"{_beverage.Describe()}, syrup";
+            return $"{_beverage.Describe()}, {Flavour} syrup";
         }
     }
 }

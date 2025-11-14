@@ -15,6 +15,6 @@ public class Tea : IBeverage
     }
     public string Describe()
     {
-        return "A soothing cup of tea.";
+        return "Tea";
     }
 }

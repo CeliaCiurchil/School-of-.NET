@@ -18,6 +18,6 @@ public class Expresso : IBeverage
 
     public string Describe()
     {
-        return "A strong and bold coffee ";
+        return "Expresso";
     }
 }

@@ -16,7 +16,7 @@ namespace Cafe.Domain.Beverages
         }
         public string Describe()
         {
-            return "A warm and sweet hot chocolate.";
+            return "Hot chocolate";
         }
     }
 }
