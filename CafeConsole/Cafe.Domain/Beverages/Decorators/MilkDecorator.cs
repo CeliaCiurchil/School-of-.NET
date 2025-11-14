@@ -1,0 +1,26 @@
+﻿using Cafe.Domain.Beverages.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Cafe.Domain.Beverages.Decorators
+{
+    public sealed class MilkDecorator : BeverageDecorator
+    {
+        private const decimal MilkPrice = 0.40m;
+
+        public MilkDecorator(IBeverage beverage) : base(beverage) { }
+
+        public override decimal Cost()
+        {
+            return base.Cost() + MilkPrice;
+        }
+
+        public override string Describe()
+        {
+            return $"{base.Describe()}, milk";
+        }
+    }
+}
