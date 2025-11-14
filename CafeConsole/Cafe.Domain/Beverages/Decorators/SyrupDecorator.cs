@@ -10,9 +10,10 @@ namespace Cafe.Domain.Beverages.Decorators
     public sealed class SyrupDecorator : BeverageDecorator
     {
         private const decimal SyrupPrice = 0.25m;
+
         private string Flavour { get; }
 
-        public SyrupDecorator(IBeverage beverage, string flavour) : base(beverage) 
+        public SyrupDecorator(IBeverage beverage, string flavour = "vanilla") : base(beverage) 
         {
             Flavour = flavour;
         }

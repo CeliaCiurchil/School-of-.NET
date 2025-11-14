@@ -15,6 +15,7 @@ namespace Cafe.CLI.Menus;
 public class OrderMenu
 {
     private readonly IOrderService orderService;
+
     public OrderMenu(IOrderService orderService)
     {
         this.orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));
@@ -61,14 +62,23 @@ public class OrderMenu
             var choice = Console.ReadLine();
             switch (choice)
             {
-                case "1": addOns.Add(new AddOnChoice(AddOn.Milk)); break;
+                case "1": 
+                    addOns.Add(new AddOnChoice(AddOn.Milk)); 
+                    break;
+
                 case "2":
                     Console.Write("Enter syrup flavor: ");
                     var flavor = Console.ReadLine();
                     addOns.Add(new AddOnChoice(AddOn.Syrup, flavor));
                     break;
-                case "3": addOns.Add(new AddOnChoice(AddOn.ExtraShot)); break;
-                case "0": return addOns;
+
+                case "3": 
+                    addOns.Add(new AddOnChoice(AddOn.ExtraShot)); 
+                    break;
+
+                case "0": 
+                    return addOns;
+
                 default: Console.WriteLine("Invalid option."); break;
             }
         }
@@ -85,9 +95,13 @@ public class OrderMenu
             {
                 case "1":
                     return PricingType.Regular;
+
                 case "2":
                     return PricingType.Discount;
-                default: Console.WriteLine("Invalid option."); break;
+
+                default: 
+                    Console.WriteLine("Invalid option."); 
+                    break;
             }
         }
     }

@@ -15,7 +15,9 @@ namespace Cafe.Domain.Beverages.Decorators
             => _beverage = beverage ?? throw new ArgumentNullException(nameof(beverage));
 
         public virtual string Name => _beverage.Name;
+
         public virtual decimal Cost() => _beverage.Cost();
+
         public virtual string Describe() => _beverage.Describe();
     }
 }

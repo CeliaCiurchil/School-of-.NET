@@ -9,10 +9,12 @@ namespace Cafe.Domain.Beverages;
 public class Tea : IBeverage
 {
     public string Name => "Tea";
+
     public decimal Cost()
     {
         return 2.00m;
     }
+
     public string Describe()
     {
         return "Tea";

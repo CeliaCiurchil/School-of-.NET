@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 using Cafe.Domain.Enums;
 using Cafe.Application.Models.Orders;
 
-namespace Cafe.Application.Services
+namespace Cafe.Application.Services;
+
+public interface IOrderService
 {
-    public interface IOrderService
-    {
-        OrderPlaced PlaceOrder(OrderRequest orderRequest);
-    }
+    OrderPlaced PlaceOrder(OrderRequest orderRequest);
 }

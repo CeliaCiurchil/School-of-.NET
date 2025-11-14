@@ -19,6 +19,7 @@ public class OrderService : IOrderService
     private readonly IBeverageFactory beverageFactory;
 
     private readonly IOrderEventPublisher publisher;
+
     private readonly IPricingStrategyManager pricingStrategyManager;
 
     public OrderService(IBeverageFactory beverageFactory, IOrderEventPublisher publisher, IPricingStrategyManager pricingStrategyManager)
@@ -32,6 +33,7 @@ public class OrderService : IOrderService
     {
         return beverageFactory.CreateBeverage(beverageType);
     }
+
     private static IBeverage ApplyAddOns(IBeverage beverage, IEnumerable<AddOnChoice> addOns)
     {
         foreach (var addOn in addOns)
