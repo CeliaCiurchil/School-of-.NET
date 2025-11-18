@@ -9,3 +9,4 @@ namespace Cafe.Application.Models.Orders
 {
     public sealed record AddOnChoice(AddOn Name, string? Option = null);
 }
+

@@ -12,4 +12,3 @@ public sealed record OrderRequest(
     IReadOnlyList<AddOnChoice> AddOns,
     PricingType PricingPolicy
 );
-
