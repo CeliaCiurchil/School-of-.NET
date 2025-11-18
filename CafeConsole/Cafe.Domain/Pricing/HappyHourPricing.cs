@@ -1,8 +1,13 @@
-﻿namespace Cafe.Domain.Pricing;
+﻿using Cafe.Domain.Enums;
+
+namespace Cafe.Domain.Pricing;
 
 public class HappyHourPricing : IPricingStrategy
 {
     private const decimal DiscountRate = 0.20m;
+
+    public PricingType pricingType { get; } = PricingType.Discount;
+
     public decimal Apply(decimal subtotal)
     {
         if (subtotal < 0)
