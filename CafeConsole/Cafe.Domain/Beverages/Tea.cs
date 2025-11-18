@@ -10,13 +10,7 @@ public class Tea : IBeverage
 {
     public string Name => "Tea";
 
-    public decimal Cost()
-    {
-        return 2.00m;
-    }
+    public decimal Cost() => 2.00m;
 
-    public string Describe()
-    {
-        return "Tea";
-    }
+    public string Describe() => "Tea";
 }

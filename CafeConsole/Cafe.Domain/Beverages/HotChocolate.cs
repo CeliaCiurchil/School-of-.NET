@@ -10,13 +10,9 @@ namespace Cafe.Domain.Beverages
     public class HotChocolate : IBeverage
     {
         public string Name => "Hot Chocolate";
-        public decimal Cost()
-        {
-            return 3.00m;
-        }
-        public string Describe()
-        {
-            return "Hot chocolate";
-        }
+
+        public decimal Cost() => 3.00m;
+
+        public string Describe() => "Hot chocolate";
     }
 }

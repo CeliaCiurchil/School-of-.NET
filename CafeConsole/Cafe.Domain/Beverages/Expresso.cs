@@ -11,13 +11,7 @@ public class Expresso : IBeverage
 {
     public string Name => "Expresso";
 
-    public decimal Cost()
-    {
-        return 2.50m;
-    }
+    public decimal Cost() => 2.50m;
 
-    public string Describe()
-    {
-        return "Expresso";
-    }
+    public string Describe() => "Expresso";
 }

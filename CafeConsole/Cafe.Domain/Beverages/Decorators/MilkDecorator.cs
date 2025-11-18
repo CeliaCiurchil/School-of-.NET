@@ -13,14 +13,8 @@ namespace Cafe.Domain.Beverages.Decorators
 
         public MilkDecorator(IBeverage beverage) : base(beverage) { }
 
-        public override decimal Cost()
-        {
-            return base.Cost() + MilkPrice;
-        }
+        public override decimal Cost() => base.Cost() + MilkPrice;
 
-        public override string Describe()
-        {
-            return $"{base.Describe()}, milk";
-        }
+        public override string Describe() => $"{base.Describe()}, milk";
     }
 }
