@@ -12,7 +12,7 @@ public class BeverageFactoryTests
     {
         var factory = new BeverageFactory();
 
-        IBeverage beverage = factory.CreateBeverage(BeverageType.Expresso);
+        var beverage = factory.CreateBeverage(BeverageType.Expresso);
 
         Assert.IsType<Expresso>(beverage);
     }
@@ -22,7 +22,7 @@ public class BeverageFactoryTests
     {
         var factory = new BeverageFactory();
 
-        IBeverage beverage = factory.CreateBeverage(BeverageType.Tea);
+        var beverage = factory.CreateBeverage(BeverageType.Tea);
 
         Assert.IsType<Tea>(beverage);
     }

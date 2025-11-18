@@ -32,11 +32,11 @@ public static class Composition
         services.AddSingleton<Menu>();
 
         var sp = services.BuildServiceProvider();
-        ConnectSubscribers(sp);
+        WireEvents(sp);
         return sp;
     }
 
-    private static void ConnectSubscribers(IServiceProvider sp)
+    private static void WireEvents(IServiceProvider sp)
     {
         var publisher = sp.GetRequiredService<IOrderEventPublisher>();
         foreach (var sub in sp.GetServices<IOrderEventSubscriber>())
