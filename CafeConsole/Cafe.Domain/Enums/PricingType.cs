@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Cafe.Domain.Enums;
 
-namespace Cafe.Domain.Enums
+public enum PricingType
 {
-    public enum PricingType
-    {
-        Regular,
-        Discount
-    }
+    Regular,
+    Discount
 }

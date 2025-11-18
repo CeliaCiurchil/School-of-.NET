@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Cafe.Domain.Enums;
 
-namespace Cafe.Domain.Enums
+public enum AddOn
 {
-    public enum AddOn
-    {
-        Milk,
-        ExtraShot,
-        Syrup
-    }
+    Milk,
+    ExtraShot,
+    Syrup
 }

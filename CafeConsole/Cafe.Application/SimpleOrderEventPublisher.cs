@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Cafe.Domain.Events;
 
-using Cafe.Domain.Events;
 namespace Cafe.Application;
 
 public class SimpleOrderEventPublisher : IOrderEventPublisher

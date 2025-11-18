@@ -1,12 +1,5 @@
-﻿using Cafe.Domain.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Cafe.Domain.Enums;
-using Cafe.Application.Models.Orders;
+﻿using Cafe.Application.Models.Orders;
+using Cafe.Domain.Events;
 
 namespace Cafe.Application.Services;
 

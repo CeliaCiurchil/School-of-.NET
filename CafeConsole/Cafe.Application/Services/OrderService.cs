@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Cafe.Application.Models.Orders;
+using Cafe.Domain.Beverages.Decorators;
 using Cafe.Domain.Beverages.Interfaces;
 using Cafe.Domain.Enums;
 using Cafe.Domain.Events;
 using Cafe.Domain.Factories;
-using Cafe.Domain.Beverages.Decorators;
 using Cafe.Domain.Pricing;
-using Cafe.Application.Models.Orders;
 
 namespace Cafe.Application.Services;
 

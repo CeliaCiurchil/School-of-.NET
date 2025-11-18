@@ -1,14 +1,6 @@
-﻿using Cafe.Application.Services;
-using Cafe.Domain.Beverages.Interfaces;
+﻿using Cafe.Application.Models.Orders;
+using Cafe.Application.Services;
 using Cafe.Domain.Enums;
-using Cafe.Domain.Pricing;
-using Cafe.Infrastructure.Factories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cafe.Application.Models.Orders;
 
 namespace Cafe.CLI.Menus;
 
@@ -62,8 +54,8 @@ public class OrderMenu
             var choice = Console.ReadLine();
             switch (choice)
             {
-                case "1": 
-                    addOns.Add(new AddOnChoice(AddOn.Milk)); 
+                case "1":
+                    addOns.Add(new AddOnChoice(AddOn.Milk));
                     break;
 
                 case "2":
@@ -72,11 +64,11 @@ public class OrderMenu
                     addOns.Add(new AddOnChoice(AddOn.Syrup, flavor));
                     break;
 
-                case "3": 
-                    addOns.Add(new AddOnChoice(AddOn.ExtraShot)); 
+                case "3":
+                    addOns.Add(new AddOnChoice(AddOn.ExtraShot));
                     break;
 
-                case "0": 
+                case "0":
                     return addOns;
 
                 default: Console.WriteLine("Invalid option."); break;
@@ -99,8 +91,8 @@ public class OrderMenu
                 case "2":
                     return PricingType.Discount;
 
-                default: 
-                    Console.WriteLine("Invalid option."); 
+                default:
+                    Console.WriteLine("Invalid option.");
                     break;
             }
         }
