@@ -22,7 +22,7 @@ public class OrderMenu
         var pricing = AskPricing();
 
         var request = new OrderRequest(baseDrink, addOns, pricing);
-        var evt = orderService.PlaceOrder(request);
+        orderService.PlaceOrder(request);
     }
 
     private static BeverageType AskBeverage()
