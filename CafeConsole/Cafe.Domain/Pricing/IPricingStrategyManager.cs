@@ -9,6 +9,6 @@ namespace Cafe.Domain.Pricing
 {
     public interface IPricingStrategyManager
     {
-        IPricingStrategy GetStrategy(PricingType pricingType);
+        public IPricingStrategy GetStrategy(PricingType pricingType);
     }
 }

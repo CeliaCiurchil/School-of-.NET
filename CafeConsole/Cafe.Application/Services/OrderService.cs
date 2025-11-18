@@ -64,11 +64,11 @@ public class OrderService : IOrderService
 
     public OrderPlaced PlaceOrder(OrderRequest orderRequest)
     {
-        IBeverage beverage = ChooseBase(orderRequest.BaseDrink);
+        var beverage = ChooseBase(orderRequest.BaseDrink);
 
         beverage = ApplyAddOns(beverage, orderRequest.AddOns);
 
-        decimal subtotal = beverage.Cost();
+        var subtotal = beverage.Cost();
         var strategy = pricingStrategyManager.GetStrategy(orderRequest.PricingPolicy);
         var total = strategy.Apply(subtotal);
 
