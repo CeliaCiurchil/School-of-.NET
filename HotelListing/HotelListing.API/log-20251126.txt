@@ -1,0 +1,11 @@
+2025-11-26 16:51:15.841 +02:00 [WRN] The ASP.NET Core developer certificate is not trusted. For information about trusting the ASP.NET Core developer certificate, see https://aka.ms/aspnet/https-trust-dev-cert.
+2025-11-26 16:51:15.959 +02:00 [INF] Now listening on: https://localhost:7278
+2025-11-26 16:51:15.961 +02:00 [INF] Now listening on: http://localhost:5204
+2025-11-26 16:51:16.047 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-26 16:51:16.048 +02:00 [INF] Hosting environment: Development
+2025-11-26 16:51:16.049 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-11-26 16:52:05.004 +02:00 [INF] Now listening on: http://localhost:5204
+2025-11-26 16:52:05.129 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-26 16:52:05.130 +02:00 [INF] Hosting environment: Development
+2025-11-26 16:52:05.131 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-11-26 16:52:14.469 +02:00 [WRN] Failed to determine the https port for redirect.
