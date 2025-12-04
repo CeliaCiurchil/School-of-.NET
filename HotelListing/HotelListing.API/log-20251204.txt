@@ -136,3 +136,13 @@
 2025-12-04 15:22:08.184 +02:00 [INF] Content root path: C:\Users\cciurchil\Source\Repos\School-of-.NET\HotelListing\HotelListing.API
 2025-12-04 15:22:16.544 +02:00 [WRN] Failed to determine the https port for redirect.
 2025-12-04 15:22:16.866 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-04 15:24:28.407 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 15:24:28.550 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 15:24:28.552 +02:00 [INF] Hosting environment: Development
+2025-12-04 15:24:28.553 +02:00 [INF] Content root path: C:\Users\cciurchil\Source\Repos\School-of-.NET\HotelListing\HotelListing.API
+2025-12-04 16:35:44.892 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 16:35:45.074 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 16:35:45.076 +02:00 [INF] Hosting environment: Development
+2025-12-04 16:35:45.079 +02:00 [INF] Content root path: C:\Users\cciurchil\Source\Repos\School-of-.NET\HotelListing\HotelListing.API
+2025-12-04 16:35:52.965 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 16:35:53.322 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
