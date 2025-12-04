@@ -120,3 +120,7 @@
 2025-12-04 14:56:56.891 +02:00 [INF] Application started. Press Ctrl+C to shut down.
 2025-12-04 14:56:56.893 +02:00 [INF] Hosting environment: Development
 2025-12-04 14:56:56.894 +02:00 [INF] Content root path: C:\Users\cciurchil\Source\Repos\School-of-.NET\HotelListing\HotelListing.API
+2025-12-04 15:16:22.405 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 15:16:22.556 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 15:16:22.558 +02:00 [INF] Hosting environment: Development
+2025-12-04 15:16:22.560 +02:00 [INF] Content root path: C:\Users\cciurchil\Source\Repos\School-of-.NET\HotelListing\HotelListing.API
