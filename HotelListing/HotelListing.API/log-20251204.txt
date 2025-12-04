@@ -1,0 +1,122 @@
+2025-12-04 10:46:47.859 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 10:46:48.162 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 10:46:48.164 +02:00 [INF] Hosting environment: Development
+2025-12-04 10:46:48.167 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 10:47:02.500 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 10:47:04.000 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-04 10:51:26.259 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 10:51:26.556 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 10:51:26.558 +02:00 [INF] Hosting environment: Development
+2025-12-04 10:51:26.558 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 10:51:48.278 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 10:51:48.557 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-04 10:56:14.585 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 10:56:14.709 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 10:56:14.710 +02:00 [INF] Hosting environment: Development
+2025-12-04 10:56:14.711 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 10:57:01.409 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 10:57:01.649 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 10:57:01.652 +02:00 [INF] Hosting environment: Development
+2025-12-04 10:57:01.653 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 10:57:18.137 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 10:57:18.379 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-04 11:11:48.787 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 11:11:49.181 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 11:11:49.183 +02:00 [INF] Hosting environment: Development
+2025-12-04 11:11:49.187 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 11:12:00.788 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 11:12:01.159 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-04 11:22:44.067 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 11:22:44.546 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 11:22:44.549 +02:00 [INF] Hosting environment: Development
+2025-12-04 11:22:44.552 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 11:22:53.181 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 11:22:53.652 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-04 11:23:12.401 +02:00 [ERR] Something went wrong in /api/Countries/234: HotelListing.API.Exceptions.NotFoundException: Entity "country" (234) was not found.
+   at HotelListing.API.Controllers.CountriesController.GetCountry(Int32 id) in C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API\Controllers\CountriesController.cs:line 49
+   at lambda_method6(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at HotelListing.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API\Middleware\ExceptionMiddleware.cs:line 22
+2025-12-04 11:42:47.240 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 11:42:47.700 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 11:42:47.703 +02:00 [INF] Hosting environment: Development
+2025-12-04 11:42:47.706 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 11:43:26.656 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 11:43:26.792 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1","1.0"]
+2025-12-04 11:48:43.529 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 11:48:43.882 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 11:48:43.886 +02:00 [INF] Hosting environment: Development
+2025-12-04 11:48:43.890 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 11:49:28.213 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 11:49:28.316 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1","1.0"]
+2025-12-04 11:50:33.624 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1","1.0"]
+2025-12-04 11:51:26.384 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-04 11:56:59.347 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 11:56:59.481 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 11:56:59.483 +02:00 [INF] Hosting environment: Development
+2025-12-04 11:56:59.485 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 11:57:20.960 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 11:57:21.223 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-04 13:44:27.403 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 13:44:27.585 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 13:44:27.587 +02:00 [INF] Hosting environment: Development
+2025-12-04 13:44:27.591 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 13:45:57.652 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 13:45:58.577 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1.0","string"]
+2025-12-04 13:46:05.159 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1","1.0","string"]
+2025-12-04 13:46:30.199 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1","1.0","string"]
+2025-12-04 13:46:34.462 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1.0","string"]
+2025-12-04 13:46:35.653 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1.0","string"]
+2025-12-04 13:47:32.319 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1.0","string"]
+2025-12-04 13:47:56.535 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1","1.0","string"]
+2025-12-04 13:51:50.749 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 13:51:50.966 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 13:51:50.967 +02:00 [INF] Hosting environment: Development
+2025-12-04 13:51:50.968 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 13:51:56.629 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 13:51:56.739 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1.0","string"]
+2025-12-04 13:52:20.236 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 13:52:20.450 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 13:52:20.454 +02:00 [INF] Hosting environment: Development
+2025-12-04 13:52:20.456 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 13:52:26.321 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 13:52:26.882 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-04 13:52:31.604 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-12-04 13:52:31.607 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-12-04 14:02:47.482 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 14:02:47.630 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 14:02:47.635 +02:00 [INF] Hosting environment: Development
+2025-12-04 14:02:47.637 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 14:03:19.339 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 14:03:19.419 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1.0","string"]
+2025-12-04 14:03:40.171 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-04 14:03:41.783 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-12-04 14:03:41.785 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-12-04 14:32:49.712 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 14:32:49.836 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 14:32:49.873 +02:00 [INF] Hosting environment: Development
+2025-12-04 14:32:49.880 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 14:33:23.929 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 14:33:24.230 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-04 14:34:19.092 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1.0","string"]
+2025-12-04 14:34:22.611 +02:00 [INF] The requested API version is ambiguous. Requested API Versions: ["1.0","string"]
+2025-12-04 14:54:57.509 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 14:54:57.650 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 14:54:57.652 +02:00 [INF] Hosting environment: Development
+2025-12-04 14:54:57.657 +02:00 [INF] Content root path: C:\Users\cciurchil\OneDrive - ENDAVA\Documents\mine\.NET\HotelListing\HotelListing.API
+2025-12-04 14:55:11.611 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 14:55:11.906 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-04 14:56:56.791 +02:00 [INF] Now listening on: http://localhost:5204
+2025-12-04 14:56:56.891 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 14:56:56.893 +02:00 [INF] Hosting environment: Development
+2025-12-04 14:56:56.894 +02:00 [INF] Content root path: C:\Users\cciurchil\Source\Repos\School-of-.NET\HotelListing\HotelListing.API
