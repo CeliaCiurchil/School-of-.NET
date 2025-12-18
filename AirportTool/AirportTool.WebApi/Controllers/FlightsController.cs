@@ -29,9 +29,6 @@ namespace AirportTool.WebApi.Controllers
         public async Task<ActionResult<FlightReadDto>> GetById(int id, CancellationToken ct)
         {
             var flight = await _flightService.GetByIdAsync(id, ct);
-            if (flight is null)
-                return NotFound();
-
             return Ok(flight);
         }
 
@@ -46,8 +43,6 @@ namespace AirportTool.WebApi.Controllers
         public async Task<ActionResult<FlightReadDto>> Update(int id, FlightUpdateDto dto, CancellationToken ct)
         {
             var updated = await _flightService.UpdateAsync(id, dto, ct);
-            if (updated is null)
-                return NotFound();
 
             return Ok(updated);
         }
@@ -56,8 +51,6 @@ namespace AirportTool.WebApi.Controllers
         public async Task<IActionResult> Delete(int id, CancellationToken ct)
         {
             var deleted = await _flightService.DeleteAsync(id, ct);
-            if (!deleted)
-                return NotFound();
 
             return NoContent();
         }
