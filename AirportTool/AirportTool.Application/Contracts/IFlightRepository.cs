@@ -1,4 +1,5 @@
-﻿using AirportTool.Domain.Entities;
+﻿using AirportTool.Application.ModelDto.Flight;
+using AirportTool.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,5 @@
 ﻿using AirportTool.Application.Contracts;
+using AirportTool.Application.Exceptions;
 using AirportTool.Application.ModelDto.Flight;
 using AirportTool.Domain.Entities;
 using AutoMapper;
@@ -25,7 +26,7 @@ namespace AirportTool.Application.Services
         public async Task<FlightReadDto?> GetByIdAsync(int id, CancellationToken ct = default)
         {
             var flight = await _unitOfWork.Flights.GetByIdAsync(id, ct);
-            return flight is null ? null : _mapper.Map<FlightReadDto>(flight);
+            return flight is null ? throw new NotFoundException(typeof(Flight).Name, id) : _mapper.Map<FlightReadDto>(flight);
         }
 
         public async Task<FlightReadDto> CreateAsync(FlightCreateDto dto, CancellationToken ct = default)
@@ -39,7 +40,7 @@ namespace AirportTool.Application.Services
         {
             var exists = await _unitOfWork.Flights.ExistsAsync(id, ct);
             if (!exists)
-                return null;
+                throw new NotFoundException(typeof(Flight).Name, id);
 
             var flight = _mapper.Map<Flight>(dto);
             flight.Id = id;
@@ -54,7 +55,9 @@ namespace AirportTool.Application.Services
         {
             var exists = await _unitOfWork.Flights.ExistsAsync(id, ct);
             if (!exists)
-                return false;
+            {
+                throw new NotFoundException(typeof(Flight).Name, id);
+            }
 
             await _unitOfWork.Flights.DeleteAsync(id, ct);
             return true;
