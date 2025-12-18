@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AirportTool.Application.ModelDto.Flight;
+﻿using AirportTool.Application.ModelDto.Flight;
 
 namespace AirportTool.Application.Contracts
 {
     public interface IFlightService
     {
-        public Task<FlightReadDto?> GetByIdAsync(int id, CancellationToken ct = default);
+        Task<IEnumerable<FlightReadDto>> GetAllAsync(CancellationToken ct = default);
+        Task<FlightReadDto?> GetByIdAsync(int id, CancellationToken ct = default);
+        Task<FlightReadDto> CreateAsync(FlightCreateDto dto, CancellationToken ct = default);
+        Task<FlightReadDto?> UpdateAsync(int id, FlightUpdateDto dto, CancellationToken ct = default);
+        Task<bool> DeleteAsync(int id, CancellationToken ct = default);
     }
 }
