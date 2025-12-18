@@ -9,22 +9,57 @@ namespace AirportTool.WebApi.Controllers
     [ApiController]
     public class FlightsController : ControllerBase
     {
-        public readonly IUnitOfWork _unitOfWork;
+        public readonly IFlightService _flightService;
 
-        public FlightsController(IUnitOfWork unitOfWork)
+        public FlightsController(IFlightService flightService)
         {
-            _unitOfWork = unitOfWork;
+            _flightService = flightService;
+        }
+
+        // GET: api/Flights
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<FlightReadDto>>> GetAll(CancellationToken ct)
+        {
+            var flights = await _flightService.GetAllAsync(ct);
+            return Ok(flights);
         }
 
         // GET: api/Flights/5
         [HttpGet("{id}")]
         public async Task<ActionResult<FlightReadDto>> GetById(int id, CancellationToken ct)
         {
-            var flight = await _unitOfWork.Flights.GetByIdAsync(id, ct);
+            var flight = await _flightService.GetByIdAsync(id, ct);
             if (flight is null)
                 return NotFound();
 
             return Ok(flight);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<FlightReadDto>> Create(FlightCreateDto dto, CancellationToken ct)
+        {
+            var createdFlight = await _flightService.CreateAsync(dto, ct);
+            return CreatedAtAction(nameof(GetById), new { id = createdFlight.Id }, createdFlight);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<FlightReadDto>> Update(int id, FlightUpdateDto dto, CancellationToken ct)
+        {
+            var updated = await _flightService.UpdateAsync(id, dto, ct);
+            if (updated is null)
+                return NotFound();
+
+            return Ok(updated);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id, CancellationToken ct)
+        {
+            var deleted = await _flightService.DeleteAsync(id, ct);
+            if (!deleted)
+                return NotFound();
+
+            return NoContent();
         }
     }
 }
