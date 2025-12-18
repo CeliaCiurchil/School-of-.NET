@@ -4,11 +4,7 @@ using AirportTool.Infrastructure.Persistence;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FlightDb = AirportTool.Infrastructure.Persistence.Entities.Flight;
 
 namespace AirportTool.Infrastructure.Repositories
 {
@@ -23,24 +19,34 @@ namespace AirportTool.Infrastructure.Repositories
             _mapper = mapper;
         }
 
-        public Task AddAsync(Flight entity, CancellationToken ct = default)
+        public async Task<Flight> AddAsync(Flight entity, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            var dbEntity = _mapper.Map<FlightDb>(entity);
+            await _context.Flights.AddAsync(dbEntity, ct);
+            await _context.SaveChangesAsync(ct);
+            return _mapper.Map<Flight>(dbEntity);
         }
 
-        public Task DeleteAsync(int id, CancellationToken ct = default)
+        public async Task DeleteAsync(int id, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            await _context.Flights
+                .Where(f => f.Id == id)
+                .ExecuteDeleteAsync(ct);
         }
 
         public Task<bool> ExistsAsync(int id, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            return _context.Flights
+                .AsNoTracking()
+                .AnyAsync(f => f.Id == id, ct);
         }
 
-        public Task<IEnumerable<Flight>> GetAllAsync(CancellationToken ct = default)
+        public async Task<IEnumerable<Flight>> GetAllAsync(CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            return await _context.Flights
+                .AsNoTracking()
+                .ProjectTo<Flight>(_mapper.ConfigurationProvider)
+                .ToListAsync(ct);
         }
 
         public async Task<Flight> GetByIdAsync(int id, CancellationToken ct = default)
@@ -53,9 +59,18 @@ namespace AirportTool.Infrastructure.Repositories
             return entity;
         }
 
-        public Task UpdateAsync(Flight entity, CancellationToken ct = default)
+        public async Task UpdateAsync(Flight entity, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            await _context.Flights
+                .Where(f => f.Id == entity.Id)
+                .ExecuteUpdateAsync(setters => setters
+                    .SetProperty(f => f.AirlineId, entity.AirlineId)
+                    .SetProperty(f => f.FlightNumber, entity.FlightNumber)
+                    .SetProperty(f => f.OriginAirportId, entity.OriginAirportId)
+                    .SetProperty(f => f.DestinationAirportId, entity.DestinationAirportId)
+                    .SetProperty(f => f.DefaultAircraftId, entity.DefaultAircraftId)
+                    .SetProperty(f => f.IsActive, entity.IsActive),
+                ct);
         }
     }
 }

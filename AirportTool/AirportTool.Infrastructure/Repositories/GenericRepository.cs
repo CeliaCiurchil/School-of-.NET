@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AirportTool.Infrastructure.Repositories
 {
-    public class GenericRepository<TEntity,T> : IGenericRepository<T> where T : class, new() where TEntity : class, new()
+    public class GenericRepository<TEntity, T> : IGenericRepository<T> where T : class, new() where TEntity : class, new()
     {
         private readonly IMapper _mapper;
         private readonly FlightBookingDbContext _context;
@@ -27,7 +27,7 @@ namespace AirportTool.Infrastructure.Repositories
             await _context.AddAsync(entity);
         }
 
-        public Task AddAsync(T entity, CancellationToken ct = default)
+        public Task<T> AddAsync(T entity, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
