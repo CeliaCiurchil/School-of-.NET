@@ -1,5 +1,6 @@
 ﻿using AirportTool.Application.Contracts;
 using AirportTool.Application.ModelDto.Flight;
+using AirportTool.Application.ModelDto.FlightSchedule;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
