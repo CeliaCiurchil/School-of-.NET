@@ -9,6 +9,7 @@ namespace AirportTool.Application.Contracts
     public interface IUnitOfWork
     {
         public IFlightRepository Flights { get; }
+        public IFlightScheduleRepository FlightSchedules { get; }
         public Task<int> SaveChangesAsync();
     }
 }

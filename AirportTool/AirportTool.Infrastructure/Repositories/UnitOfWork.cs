@@ -14,11 +14,17 @@ namespace AirportTool.Infrastructure.Repositories
         private readonly FlightBookingDbContext _context;
 
         public IFlightRepository Flights { get; }
+        public IFlightScheduleRepository FlightSchedules { get; }
 
-        public UnitOfWork(FlightBookingDbContext context, IMapper mapper, IFlightRepository flightRepository)
+        public UnitOfWork(
+            FlightBookingDbContext context,
+            IMapper mapper,
+            IFlightRepository flightRepository,
+            IFlightScheduleRepository flightScheduleRepository)
         {
             _context = context;
             Flights = flightRepository;
+            FlightSchedules = flightScheduleRepository;
         }
 
         public Task<int> SaveChangesAsync()
