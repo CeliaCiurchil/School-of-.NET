@@ -31,11 +31,13 @@ builder.Services.AddAutoMapper(ctx =>
 // Add services to the container.
 
 builder.Services.AddScoped<IFlightRepository, FlightRepository>();
+builder.Services.AddScoped<IFlightScheduleRepository, FlightScheduleRepository>();
 
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IFlightService, FlightService>();
+builder.Services.AddScoped<IFlightScheduleService, FlightScheduleService>();
 
 builder.Services.AddControllers();
 
