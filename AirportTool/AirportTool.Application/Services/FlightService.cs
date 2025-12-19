@@ -33,6 +33,7 @@ namespace AirportTool.Application.Services
         {
             var flight = _mapper.Map<Flight>(dto);
             var created = await _unitOfWork.Flights.AddAsync(flight, ct);
+            await _unitOfWork.SaveChangesAsync();
             return _mapper.Map<FlightReadDto>(created);
         }
 
