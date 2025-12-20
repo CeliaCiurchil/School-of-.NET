@@ -47,6 +47,11 @@ namespace AirportTool.WebApi.Middleware
                     statusCode = HttpStatusCode.NotFound;
                     errorDetails.ErrorType = "Not Found";
                     break;
+                case BadRequestException badRequestException:
+                    errorDetails.ErrorMessage = badRequestException.Message;
+                    statusCode = HttpStatusCode.BadRequest;
+                    errorDetails.ErrorType = "Bad Request";
+                    break;
                 default:
                     break;
             }
