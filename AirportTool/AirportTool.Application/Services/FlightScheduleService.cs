@@ -33,11 +33,37 @@ namespace AirportTool.Application.Services
             var created = await _unitOfWork.FlightSchedules.AddAsync(schedule, ct);
 
             // Reload with related data for detailed response
-            var withDetails = await _unitOfWork.FlightSchedules.GetByIdAsync(created.Id, ct);
-            var scheduleDto = withDetails is not null
-                ? _mapper.Map<FlightScheduleReadDto>(withDetails)
-                : null;
+            var scheduleDto = _mapper.Map<FlightScheduleReadDto>(created);
+
             return scheduleDto ?? throw new NotFoundException(typeof(FlightSchedule).Name, created.Id);
+        }
+
+        public async Task<IEnumerable<FlightScheduleBasicInfoDto>> FindByRouteAndDateAsync(
+            string origin,
+            string destination,
+            DateTime departureDate,
+            CancellationToken ct = default)
+        {
+
+            if (string.IsNullOrWhiteSpace(origin))
+                throw new BadRequestException($"Origin airport code is required {nameof(origin)}");
+
+            if (string.IsNullOrWhiteSpace(destination))
+                throw new BadRequestException($"Destination airport code is required {nameof(destination)}");
+
+            var schedules = await _unitOfWork.FlightSchedules.FindByRouteAndDateAsync(
+                origin,
+                destination,
+                departureDate,
+                ct);
+
+            return _mapper.Map<IEnumerable<FlightScheduleBasicInfoDto>>(schedules);
+        }
+
+        public async Task<IEnumerable<UpcomingFlightsDto>> GetFlightStats(int days, CancellationToken ct = default)
+        {
+            IEnumerable<UpcomingFlights> upcomingFlights = await _unitOfWork.FlightSchedules.UpcomingFlights(days, ct);
+            return _mapper.Map<IEnumerable<UpcomingFlightsDto>>(upcomingFlights);
         }
     }
 }
