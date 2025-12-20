@@ -28,5 +28,12 @@ namespace AirportTool.WebApi.Controllers
             var created = await _flightScheduleService.CreateAsync(dto, ct);
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
+
+        [HttpGet("stats/upcoming/{days}")]
+        public async Task<ActionResult<IEnumerable<UpcomingFlightsDto>>> GetFlightStats(int days, CancellationToken ct)
+        {
+            var stats = await _flightScheduleService.GetFlightStats(days, ct);
+            return Ok(stats);
+        }
     }
 }
