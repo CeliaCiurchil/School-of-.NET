@@ -10,19 +10,43 @@ namespace AirportTool.WebApi.Controllers
     [ApiController]
     public class FlightsController : ControllerBase
     {
-        public readonly IFlightService _flightService;
+        private readonly IFlightService _flightService;
+        private readonly IFlightScheduleService _flightScheduleService;
 
-        public FlightsController(IFlightService flightService)
+        public FlightsController(IFlightService flightService, IFlightScheduleService flightScheduleService)
         {
             _flightService = flightService;
+            _flightScheduleService = flightScheduleService;
         }
 
         // GET: api/Flights
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<FlightReadDto>>> GetAll(CancellationToken ct)
         {
             var flights = await _flightService.GetAllAsync(ct);
             return Ok(flights);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<FlightScheduleBasicInfoDto>>> GetFlightInfos(
+            [FromQuery(Name = "origin")] string? originAirport,
+            [FromQuery(Name = "destination")] string? destinationAirport,
+            [FromQuery(Name = "date")] DateTime? departureDate,
+            CancellationToken ct = default)
+        {
+
+            if (departureDate is null)
+            {
+                return BadRequest("date query parameter is required.");
+            }
+
+            var schedules = await _flightScheduleService.FindByRouteAndDateAsync(
+                originAirport,
+                destinationAirport,
+                departureDate.Value,
+                ct);
+
+            return Ok(schedules);
         }
 
         // GET: api/Flights/5
