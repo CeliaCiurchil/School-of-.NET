@@ -60,6 +60,25 @@ namespace AirportTool.Infrastructure.Repositories
             return entity;
         }
 
+        public async Task<IEnumerable<FlightScheduleBasicInfo>> FindByRouteAndDateAsync(
+            string originIata,
+            string destinationIata,
+            DateTime departureDate,
+            CancellationToken ct = default)
+        {
+            var departureDayStart = departureDate.Date;
+
+            var normalizedOrigin = originIata.Trim().ToUpperInvariant();
+            var normalizedDestination = destinationIata.Trim().ToUpperInvariant();
+
+            return await _context.FlightSchedules
+                .AsNoTracking()
+                .Where(fs => fs.ScheduledDepartureUtc.Date == departureDayStart)
+                .Where(fs => fs.Flight.OriginAirport.Iatacode == normalizedOrigin &&
+                           fs.Flight.DestinationAirport.Iatacode == normalizedDestination)
+                .ProjectTo<FlightScheduleBasicInfo>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+        }
 
         public async Task UpdateAsync(FlightSchedule entity, CancellationToken ct = default)
         {
@@ -74,5 +93,36 @@ namespace AirportTool.Infrastructure.Repositories
                     .SetProperty(fs => fs.StatusId, entity.StatusId),
                 ct);
         }
+
+        public async Task<IEnumerable<UpcomingFlights>> UpcomingFlights(int days, CancellationToken ct)
+        {
+            var start = DateTime.UtcNow.Date;          
+            var endExclusive = start.AddDays(days);    
+
+            var existing = await _context.FlightSchedules
+                .AsNoTracking()
+                .Where(fs => fs.ScheduledDepartureUtc >= start &&
+                             fs.ScheduledDepartureUtc < endExclusive)
+                .GroupBy(fs => fs.ScheduledDepartureUtc.Date)
+                .Select(g => new { Date = g.Key, Count = g.Count() })
+                .ToListAsync(ct);
+
+            var byDate = existing.ToDictionary(x => x.Date, x => x.Count);
+
+            var result = Enumerable.Range(0, days)
+                .Select(i =>
+                {
+                    var d = start.AddDays(i); 
+                    return new UpcomingFlights
+                    {
+                        Date = d,
+                        Count = byDate.TryGetValue(d, out var c) ? c : 0
+                    };
+                })
+                .ToList();
+
+            return result;
+        }
+
     }
 }
