@@ -18,6 +18,9 @@ namespace AirportTool.Application.Mappers
             CreateMap<Aircraft, AircraftDto>().ReverseMap();
             CreateMap<Gate, GateDto>().ReverseMap();
             CreateMap<FlightStatus, FlightStatusDto>().ReverseMap();
+            
+            CreateMap<FlightScheduleBasicInfo, FlightScheduleBasicInfoDto>();
+            CreateMap<UpcomingFlights, UpcomingFlightsDto>();
         }
     }
 }
