@@ -10,6 +10,9 @@ namespace AirportTool.Application.Contracts
     {
         public IFlightRepository Flights { get; }
         public IFlightScheduleRepository FlightSchedules { get; }
+        public IAircraftRepository Aircrafts { get; }
+        public IAirlineRepository Airlines { get; }
+        public IAirportRepository Airports { get; }
         public Task<int> SaveChangesAsync();
     }
 }
