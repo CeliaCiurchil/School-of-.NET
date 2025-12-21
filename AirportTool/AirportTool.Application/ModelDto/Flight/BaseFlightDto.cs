@@ -2,11 +2,11 @@
 {
     public class BaseFlightDto
     {
-        public int AirlineId { get; set; }
+        public string AirlineIata { get; set; } = null!;
         public string FlightNumber { get; set; } = null!;
-        public int OriginAirportId { get; set; }
-        public int DestinationAirportId { get; set; }
-        public int? DefaultAircraftId { get; set; }
+        public string OriginIata { get; set; } = null!;
+        public string DestinationIata { get; set; } = null!;
+        public string? DefaultAircraftTail { get; set; }
         public bool IsActive { get; set; } = true;
     }
 }
