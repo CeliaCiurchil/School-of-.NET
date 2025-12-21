@@ -1,4 +1,4 @@
-﻿using AirportTool.Application.Contracts;
+using AirportTool.Application.Contracts;
 using AirportTool.Application.Exceptions;
 using AirportTool.Application.ModelDto.Flight;
 using AirportTool.Domain.Entities;
@@ -31,6 +31,12 @@ namespace AirportTool.Application.Services
 
         public async Task<FlightReadDto> CreateAsync(FlightCreateDto dto, CancellationToken ct = default)
         {
+            var duplicateExists = await _unitOfWork.Flights.ExistsByAirlineAndNumberAsync(dto.AirlineId, dto.FlightNumber, ct);
+            if (duplicateExists)
+            {
+                throw new ConflictException($"Flight number \"{dto.FlightNumber}\" already exists for airline ID {dto.AirlineId}.");
+            }
+
             var flight = _mapper.Map<Flight>(dto);
             var created = await _unitOfWork.Flights.AddAsync(flight, ct);
             await _unitOfWork.SaveChangesAsync();
@@ -39,9 +45,21 @@ namespace AirportTool.Application.Services
 
         public async Task<FlightReadDto?> UpdateAsync(int id, FlightUpdateDto dto, CancellationToken ct = default)
         {
-            var exists = await _unitOfWork.Flights.ExistsAsync(id, ct);
-            if (!exists)
+            var existing = await _unitOfWork.Flights.GetByIdAsync(id, ct);
+            if (existing is null)
+            {
                 throw new NotFoundException(typeof(Flight).Name, id);
+            }
+
+            if (existing.AirlineId != dto.AirlineId ||
+                !string.Equals(existing.FlightNumber, dto.FlightNumber, StringComparison.OrdinalIgnoreCase))
+            {
+                var duplicateExists = await _unitOfWork.Flights.ExistsByAirlineAndNumberAsync(dto.AirlineId, dto.FlightNumber, ct);
+                if (duplicateExists)
+                {
+                    throw new ConflictException($"Flight number \"{dto.FlightNumber}\" already exists for airline ID {dto.AirlineId}.");
+                }
+            }
 
             var flight = _mapper.Map<Flight>(dto);
             flight.Id = id;
