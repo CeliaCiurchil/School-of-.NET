@@ -21,7 +21,8 @@ namespace AirportTool.Infrastructure.Mappers
         {
             CreateMap<Address, AddressDb>().ReverseMap();
             CreateMap<Flight, FlightDb>().ReverseMap();
-            CreateMap<FlightSchedule, FlightScheduleDb>().ReverseMap();
+            CreateMap<FlightScheduleDb, FlightSchedule>().ReverseMap();
+            CreateMap<FlightStatusDb, FlightStatus>().ReverseMap();
             CreateMap<Gate, GateDb>().ReverseMap();
             CreateMap<Aircraft, AircraftDb>().ReverseMap();
             CreateMap<FlightScheduleDb, FlightScheduleBasicInfo>()
