@@ -31,15 +31,30 @@ namespace AirportTool.Application.Services
 
         public async Task<FlightReadDto> CreateAsync(FlightCreateDto dto, CancellationToken ct = default)
         {
-            var duplicateExists = await _unitOfWork.Flights.ExistsByAirlineAndNumberAsync(dto.AirlineId, dto.FlightNumber, ct);
+            var airline = await GetAirlineByIataAsync(dto.AirlineIata);
+            var origin = await GetAirportByIataAsync(dto.OriginIata);
+            var destination = await GetAirportByIataAsync(dto.DestinationIata);
+            var defaultAircraft = await GetAircraftByTailAsync(dto.DefaultAircraftTail);
+
+            var duplicateExists = await _unitOfWork.Flights.ExistsByAirlineAndNumberAsync(airline.Id, dto.FlightNumber, ct);
             if (duplicateExists)
             {
-                throw new ConflictException($"Flight number \"{dto.FlightNumber}\" already exists for airline ID {dto.AirlineId}.");
+                throw new ConflictException($"Flight number \"{dto.FlightNumber}\" already exists for airline ID {airline.Id}.");
             }
 
-            var flight = _mapper.Map<Flight>(dto);
+            var flight = new Flight
+            {
+                AirlineId = airline.Id,
+                FlightNumber = dto.FlightNumber,
+                OriginAirportId = origin.Id,
+                DestinationAirportId = destination.Id,
+                DefaultAircraftId = defaultAircraft?.Id,
+                IsActive = dto.IsActive
+            };
+
             var created = await _unitOfWork.Flights.AddAsync(flight, ct);
             await _unitOfWork.SaveChangesAsync();
+
             return _mapper.Map<FlightReadDto>(created);
         }
 
@@ -48,26 +63,38 @@ namespace AirportTool.Application.Services
             var existing = await _unitOfWork.Flights.GetByIdAsync(id, ct);
             if (existing is null)
             {
-                throw new NotFoundException(typeof(Flight).Name, id);
+                throw new NotFoundException(nameof(Flight), id);
             }
 
-            if (existing.AirlineId != dto.AirlineId ||
+            var airline = await GetAirlineByIataAsync(dto.AirlineIata);
+            var origin = await GetAirportByIataAsync(dto.OriginIata);
+            var destination = await GetAirportByIataAsync(dto.DestinationIata);
+            var defaultAircraft = await GetAircraftByTailAsync(dto.DefaultAircraftTail);
+
+            if (existing.AirlineId != airline.Id ||
                 !string.Equals(existing.FlightNumber, dto.FlightNumber, StringComparison.OrdinalIgnoreCase))
             {
-                var duplicateExists = await _unitOfWork.Flights.ExistsByAirlineAndNumberAsync(dto.AirlineId, dto.FlightNumber, ct);
+                var duplicateExists = await _unitOfWork.Flights.ExistsByAirlineAndNumberAsync(airline.Id, dto.FlightNumber, ct);
                 if (duplicateExists)
                 {
-                    throw new ConflictException($"Flight number \"{dto.FlightNumber}\" already exists for airline ID {dto.AirlineId}.");
+                    throw new ConflictException($"Flight number \"{dto.FlightNumber}\" already exists for airline ID {airline.Id}.");
                 }
             }
 
-            var flight = _mapper.Map<Flight>(dto);
-            flight.Id = id;
+            var flight = new Flight
+            {
+                Id = id,
+                AirlineId = airline.Id,
+                FlightNumber = dto.FlightNumber,
+                OriginAirportId = origin.Id,
+                DestinationAirportId = destination.Id,
+                DefaultAircraftId = defaultAircraft?.Id,
+                IsActive = dto.IsActive
+            };
 
             await _unitOfWork.Flights.UpdateAsync(flight, ct);
 
-            var updated = await _unitOfWork.Flights.GetByIdAsync(id, ct);
-            return updated is null ? null : _mapper.Map<FlightReadDto>(updated);
+            return _mapper.Map<FlightReadDto>(flight);
         }
 
         public async Task<bool> DeleteAsync(int id, CancellationToken ct = default)
@@ -75,11 +102,40 @@ namespace AirportTool.Application.Services
             var exists = await _unitOfWork.Flights.ExistsAsync(id, ct);
             if (!exists)
             {
-                throw new NotFoundException(typeof(Flight).Name, id);
+                throw new NotFoundException(nameof(Flight), id);
             }
 
             await _unitOfWork.Flights.DeleteAsync(id, ct);
             return true;
         }
+
+        private async Task<Airline> GetAirlineByIataAsync(string iataCode)
+        {
+            var airline = await _unitOfWork.Airlines.GetByIataCodeAsync(iataCode);
+            return EnsureFound(airline, iataCode);
+        }
+
+        private async Task<Airport> GetAirportByIataAsync(string iataCode)
+        {
+            var airport = await _unitOfWork.Airports.GetByIataCodeAsync(iataCode);
+            return EnsureFound(airport, iataCode);
+        }
+
+        private async Task<Aircraft?> GetAircraftByTailAsync(string? tailNumber)
+        {
+            if (string.IsNullOrWhiteSpace(tailNumber))
+            {
+                return null;
+            }
+
+            var aircraft = await _unitOfWork.Aircrafts.GetByTailNumberAsync(tailNumber);
+            return EnsureFound(aircraft, tailNumber);
+        }
+
+        private static T EnsureFound<T>(T? entity, object key) where T : class
+        {
+            return entity ?? throw new BadRequestException($"{typeof(T).Name} \"{key}\" is invalid / not found.");
+        }
     }
 }
+

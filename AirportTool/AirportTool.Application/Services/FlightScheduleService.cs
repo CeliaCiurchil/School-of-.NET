@@ -32,7 +32,6 @@ namespace AirportTool.Application.Services
             var schedule = _mapper.Map<FlightSchedule>(dto);
             var created = await _unitOfWork.FlightSchedules.AddAsync(schedule, ct);
 
-            // Reload with related data for detailed response
             var scheduleDto = _mapper.Map<FlightScheduleReadDto>(created);
 
             return scheduleDto ?? throw new NotFoundException(typeof(FlightSchedule).Name, created.Id);
