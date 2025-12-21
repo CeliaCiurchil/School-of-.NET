@@ -43,19 +43,20 @@ namespace AirportTool.Infrastructure.Repositories
 
         public async Task<IEnumerable<FlightSchedule>> GetAllAsync(CancellationToken ct = default)
         {
-            return await _context.FlightSchedules
+            var entities = await _context.FlightSchedules
                 .AsNoTracking()
                 .ProjectTo<FlightSchedule>(_mapper.ConfigurationProvider)
                 .ToListAsync(ct);
+
+            return entities;
         }
 
         public async Task<FlightSchedule> GetByIdAsync(int id, CancellationToken ct = default)
         {
             var entity = await _context.FlightSchedules
                 .AsNoTracking()
-                .Where(fs => fs.Id == id)
                 .ProjectTo<FlightSchedule>(_mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync(ct);
+                .FirstOrDefaultAsync(fs => fs.Id == id, ct);
 
             return entity;
         }
