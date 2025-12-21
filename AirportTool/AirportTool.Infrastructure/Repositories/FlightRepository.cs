@@ -1,4 +1,4 @@
-﻿using AirportTool.Application.Contracts;
+using AirportTool.Application.Contracts;
 using AirportTool.Domain.Entities;
 using AirportTool.Infrastructure.Persistence;
 using AutoMapper;
@@ -41,6 +41,13 @@ namespace AirportTool.Infrastructure.Repositories
                 .AnyAsync(f => f.Id == id, ct);
         }
 
+        public Task<bool> ExistsByAirlineAndNumberAsync(int airlineId, string flightNumber, CancellationToken ct = default)
+        {
+            return _context.Flights
+                .AsNoTracking()
+                .AnyAsync(f => f.AirlineId == airlineId && f.FlightNumber == flightNumber, ct);
+        }
+
         public async Task<IEnumerable<Flight>> GetAllAsync(CancellationToken ct = default)
         {
             return await _context.Flights
@@ -52,10 +59,10 @@ namespace AirportTool.Infrastructure.Repositories
         public async Task<Flight> GetByIdAsync(int id, CancellationToken ct = default)
         {
             var entity = await _context.Flights
-                                .AsNoTracking()
-                                .Where(f => f.Id == id)
-                                .ProjectTo<Flight>(_mapper.ConfigurationProvider)
-                                .FirstOrDefaultAsync(ct);
+                .AsNoTracking()
+                .Where(f => f.Id == id)
+                .ProjectTo<Flight>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(ct);
             return entity;
         }
 
