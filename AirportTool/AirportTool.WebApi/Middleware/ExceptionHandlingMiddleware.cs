@@ -1,4 +1,4 @@
-﻿using AirportTool.Application.Exceptions;
+using AirportTool.Application.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Net;
@@ -51,6 +51,11 @@ namespace AirportTool.WebApi.Middleware
                     errorDetails.ErrorMessage = badRequestException.Message;
                     statusCode = HttpStatusCode.BadRequest;
                     errorDetails.ErrorType = "Bad Request";
+                    break;
+                case ConflictException conflictException:
+                    errorDetails.ErrorMessage = conflictException.Message;
+                    statusCode = HttpStatusCode.Conflict;
+                    errorDetails.ErrorType = "Conflict";
                     break;
                 default:
                     break;

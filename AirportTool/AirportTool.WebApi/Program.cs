@@ -1,12 +1,14 @@
 using AirportTool.Application.Contracts;
 using AirportTool.Application.Mappers;
 using AirportTool.Application.Services;
+using AirportTool.Application.Validators.Flight;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using AirportTool.Infrastructure.Mappers;
 using AirportTool.Infrastructure.Persistence;
 using AirportTool.Infrastructure.Repositories;
 using AirportTool.WebApi.Middleware;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,13 +35,15 @@ builder.Services.AddAutoMapper(ctx =>
 builder.Services.AddScoped<IFlightRepository, FlightRepository>();
 builder.Services.AddScoped<IFlightScheduleRepository, FlightScheduleRepository>();
 
-
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IFlightScheduleService, FlightScheduleService>();
 
 builder.Services.AddControllers();
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<BaseFlightDtoValidator>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
