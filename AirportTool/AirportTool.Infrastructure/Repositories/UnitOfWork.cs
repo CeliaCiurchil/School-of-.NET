@@ -1,11 +1,5 @@
-﻿using AirportTool.Application.Contracts;
+using AirportTool.Application.Contracts;
 using AirportTool.Infrastructure.Persistence;
-using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AirportTool.Infrastructure.Repositories
 {
@@ -15,16 +9,24 @@ namespace AirportTool.Infrastructure.Repositories
 
         public IFlightRepository Flights { get; }
         public IFlightScheduleRepository FlightSchedules { get; }
+        public IAircraftRepository Aircrafts { get; }
+        public IAirlineRepository Airlines { get; }
+        public IAirportRepository Airports { get; }
 
         public UnitOfWork(
             FlightBookingDbContext context,
-            IMapper mapper,
             IFlightRepository flightRepository,
-            IFlightScheduleRepository flightScheduleRepository)
+            IFlightScheduleRepository flightScheduleRepository,
+            IAircraftRepository aircraftRepository,
+            IAirlineRepository airlineRepository,
+            IAirportRepository airportRepository)
         {
             _context = context;
             Flights = flightRepository;
             FlightSchedules = flightScheduleRepository;
+            Aircrafts = aircraftRepository;
+            Airlines = airlineRepository;
+            Airports = airportRepository;
         }
 
         public Task<int> SaveChangesAsync()
@@ -38,4 +40,3 @@ namespace AirportTool.Infrastructure.Repositories
         }
     }
 }
-
