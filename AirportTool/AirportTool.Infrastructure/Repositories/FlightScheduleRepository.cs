@@ -125,5 +125,17 @@ namespace AirportTool.Infrastructure.Repositories
             return result;
         }
 
+        public async Task<bool> HasGateOverlapAsync(int gateId, DateTime scheduledDepartureUtc, int bufferMinutes, CancellationToken ct = default)
+        {
+            var windowStart = scheduledDepartureUtc.AddMinutes(-bufferMinutes);
+            var windowEnd = scheduledDepartureUtc.AddMinutes(bufferMinutes);
+
+            var hasOverlap = await _context.FlightSchedules
+                .AsNoTracking()
+                .Where(fs => fs.GateId == gateId)
+                .AnyAsync(fs => windowStart < fs.ScheduledDepartureUtc.AddMinutes(bufferMinutes) && windowEnd > fs.ScheduledDepartureUtc.AddMinutes(-bufferMinutes), ct);
+
+            return hasOverlap;
+        }
     }
 }

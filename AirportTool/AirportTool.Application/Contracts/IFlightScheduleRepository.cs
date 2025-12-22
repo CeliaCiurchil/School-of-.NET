@@ -12,5 +12,11 @@ namespace AirportTool.Application.Contracts
             CancellationToken ct = default);
 
         Task<IEnumerable<UpcomingFlights>> UpcomingFlights(int days,CancellationToken ct);
+
+        Task<bool> HasGateOverlapAsync(
+                int gateId,
+                DateTime scheduledDepartureUtc,
+                int bufferMinutes,
+                CancellationToken ct = default);
     }
 }
