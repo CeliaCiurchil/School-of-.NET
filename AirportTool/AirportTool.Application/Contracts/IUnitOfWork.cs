@@ -1,9 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace AirportTool.Application.Contracts
 {
     public interface IUnitOfWork
@@ -13,7 +7,8 @@ namespace AirportTool.Application.Contracts
         public IAircraftRepository Aircrafts { get; }
         public IAirlineRepository Airlines { get; }
         public IAirportRepository Airports { get; }
+        public IGateRepository Gates { get; }
+        public IFlightStatusRepository FlightStatuses { get; }
         public Task<int> SaveChangesAsync();
     }
 }
- 

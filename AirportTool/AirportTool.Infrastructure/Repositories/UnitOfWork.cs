@@ -12,6 +12,8 @@ namespace AirportTool.Infrastructure.Repositories
         public IAircraftRepository Aircrafts { get; }
         public IAirlineRepository Airlines { get; }
         public IAirportRepository Airports { get; }
+        public IGateRepository Gates { get; }
+        public IFlightStatusRepository FlightStatuses { get; }
 
         public UnitOfWork(
             FlightBookingDbContext context,
@@ -19,7 +21,9 @@ namespace AirportTool.Infrastructure.Repositories
             IFlightScheduleRepository flightScheduleRepository,
             IAircraftRepository aircraftRepository,
             IAirlineRepository airlineRepository,
-            IAirportRepository airportRepository)
+            IAirportRepository airportRepository,
+            IGateRepository gateRepository,
+            IFlightStatusRepository flightStatusRepository)
         {
             _context = context;
             Flights = flightRepository;
@@ -27,6 +31,8 @@ namespace AirportTool.Infrastructure.Repositories
             Aircrafts = aircraftRepository;
             Airlines = airlineRepository;
             Airports = airportRepository;
+            Gates = gateRepository;
+            FlightStatuses = flightStatusRepository;
         }
 
         public Task<int> SaveChangesAsync()

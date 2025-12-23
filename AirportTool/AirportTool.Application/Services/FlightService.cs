@@ -31,10 +31,10 @@ namespace AirportTool.Application.Services
 
         public async Task<FlightReadDto> CreateAsync(FlightCreateDto dto, CancellationToken ct = default)
         {
-            var airline = await GetAirlineByIataAsync(dto.AirlineIata);
-            var origin = await GetAirportByIataAsync(dto.OriginIata);
-            var destination = await GetAirportByIataAsync(dto.DestinationIata);
-            var defaultAircraft = await GetAircraftByTailAsync(dto.DefaultAircraftTail);
+            var airline = await GetAirlineByIataAsync(dto.AirlineIata, ct);
+            var origin = await GetAirportByIataAsync(dto.OriginIata, ct);
+            var destination = await GetAirportByIataAsync(dto.DestinationIata, ct);
+            var defaultAircraft = await GetAircraftByTailAsync(dto.DefaultAircraftTail, ct);
 
             var duplicateExists = await _unitOfWork.Flights.ExistsByAirlineAndNumberAsync(airline.Id, dto.FlightNumber, ct);
             if (duplicateExists)
@@ -66,10 +66,10 @@ namespace AirportTool.Application.Services
                 throw new NotFoundException(nameof(Flight), id);
             }
 
-            var airline = await GetAirlineByIataAsync(dto.AirlineIata);
-            var origin = await GetAirportByIataAsync(dto.OriginIata);
-            var destination = await GetAirportByIataAsync(dto.DestinationIata);
-            var defaultAircraft = await GetAircraftByTailAsync(dto.DefaultAircraftTail);
+            var airline = await GetAirlineByIataAsync(dto.AirlineIata, ct);
+            var origin = await GetAirportByIataAsync(dto.OriginIata, ct);
+            var destination = await GetAirportByIataAsync(dto.DestinationIata, ct);
+            var defaultAircraft = await GetAircraftByTailAsync(dto.DefaultAircraftTail, ct);
 
             if (existing.AirlineId != airline.Id ||
                 !string.Equals(existing.FlightNumber, dto.FlightNumber, StringComparison.OrdinalIgnoreCase))
@@ -109,26 +109,26 @@ namespace AirportTool.Application.Services
             return true;
         }
 
-        private async Task<Airline> GetAirlineByIataAsync(string iataCode)
+        private async Task<Airline> GetAirlineByIataAsync(string iataCode, CancellationToken ct)
         {
-            var airline = await _unitOfWork.Airlines.GetByIataCodeAsync(iataCode);
+            var airline = await _unitOfWork.Airlines.GetByIataCodeAsync(iataCode, ct);
             return EnsureFound(airline, iataCode);
         }
 
-        private async Task<Airport> GetAirportByIataAsync(string iataCode)
+        private async Task<Airport> GetAirportByIataAsync(string iataCode, CancellationToken ct)
         {
-            var airport = await _unitOfWork.Airports.GetByIataCodeAsync(iataCode);
+            var airport = await _unitOfWork.Airports.GetByIataCodeAsync(iataCode, ct);
             return EnsureFound(airport, iataCode);
         }
 
-        private async Task<Aircraft?> GetAircraftByTailAsync(string? tailNumber)
+        private async Task<Aircraft?> GetAircraftByTailAsync(string? tailNumber, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(tailNumber))
             {
                 return null;
             }
 
-            var aircraft = await _unitOfWork.Aircrafts.GetByTailNumberAsync(tailNumber);
+            var aircraft = await _unitOfWork.Aircrafts.GetByTailNumberAsync(tailNumber, ct);
             return EnsureFound(aircraft, tailNumber);
         }
 
@@ -138,4 +138,3 @@ namespace AirportTool.Application.Services
         }
     }
 }
-
