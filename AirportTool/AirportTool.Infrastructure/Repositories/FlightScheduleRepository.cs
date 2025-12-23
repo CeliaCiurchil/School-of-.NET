@@ -51,6 +51,20 @@ namespace AirportTool.Infrastructure.Repositories
             return entities;
         }
 
+        public async Task<FlightSchedule?> GetByFlightAndDepartureAsync(
+            int flightId,
+            DateTime scheduledDepartureUtc,
+            CancellationToken ct = default)
+        {
+            var entity = await _context.FlightSchedules
+                .AsNoTracking()
+                .Where(fs => fs.FlightId == flightId && fs.ScheduledDepartureUtc == scheduledDepartureUtc)
+                .ProjectTo<FlightSchedule>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(ct);
+
+            return entity;
+        }
+
         public async Task<FlightSchedule> GetByIdAsync(int id, CancellationToken ct = default)
         {
             var entity = await _context.FlightSchedules
@@ -97,8 +111,8 @@ namespace AirportTool.Infrastructure.Repositories
 
         public async Task<IEnumerable<UpcomingFlights>> UpcomingFlights(int days, CancellationToken ct)
         {
-            var start = DateTime.UtcNow.Date;          
-            var endExclusive = start.AddDays(days);    
+            var start = DateTime.UtcNow.Date;
+            var endExclusive = start.AddDays(days);
 
             var existing = await _context.FlightSchedules
                 .AsNoTracking()
@@ -113,7 +127,7 @@ namespace AirportTool.Infrastructure.Repositories
             var result = Enumerable.Range(0, days)
                 .Select(i =>
                 {
-                    var d = start.AddDays(i); 
+                    var d = start.AddDays(i);
                     return new UpcomingFlights
                     {
                         Date = d,
@@ -134,6 +148,30 @@ namespace AirportTool.Infrastructure.Repositories
                 .AsNoTracking()
                 .Where(fs => fs.GateId == gateId)
                 .AnyAsync(fs => windowStart < fs.ScheduledDepartureUtc.AddMinutes(bufferMinutes) && windowEnd > fs.ScheduledDepartureUtc.AddMinutes(-bufferMinutes), ct);
+
+            return hasOverlap;
+        }
+
+        public async Task<bool> HasGateOverlapAsync(
+            int gateId,
+            DateTime scheduledDepartureUtc,
+            int bufferMinutes,
+            int? excludeFlightScheduleId,
+            CancellationToken ct = default)
+        {
+            var query = _context.FlightSchedules
+                .AsNoTracking()
+                .Where(fs => fs.GateId == gateId);
+
+            if (excludeFlightScheduleId.HasValue)
+            {
+                query = query.Where(fs => fs.Id != excludeFlightScheduleId.Value);
+            }
+
+            var windowStart = scheduledDepartureUtc.AddMinutes(-bufferMinutes);
+            var windowEnd = scheduledDepartureUtc.AddMinutes(bufferMinutes);
+
+            var hasOverlap = await query.AnyAsync(fs => windowStart < fs.ScheduledDepartureUtc.AddMinutes(bufferMinutes) && windowEnd > fs.ScheduledDepartureUtc.AddMinutes(-bufferMinutes), ct);
 
             return hasOverlap;
         }
