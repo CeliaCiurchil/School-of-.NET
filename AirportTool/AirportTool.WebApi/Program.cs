@@ -1,13 +1,14 @@
 using AirportTool.Application.Contracts;
 using AirportTool.Application.Mappers;
+using AirportTool.Application.Options;
 using AirportTool.Application.Services;
 using AirportTool.Application.Validators.Flight;
-using FluentValidation;
-using FluentValidation.AspNetCore;
 using AirportTool.Infrastructure.Mappers;
 using AirportTool.Infrastructure.Persistence;
 using AirportTool.Infrastructure.Repositories;
 using AirportTool.WebApi.Middleware;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,12 +38,16 @@ builder.Services.AddScoped<IFlightScheduleRepository, FlightScheduleRepository>(
 builder.Services.AddScoped<IAircraftRepository, AircraftRepository>();
 builder.Services.AddScoped<IAirlineRepository, AirlineRepository>();
 builder.Services.AddScoped<IAirportRepository, AirportRepository>();
-
+builder.Services.AddScoped<IGateRepository, GateRepository>();
+builder.Services.AddScoped<IFlightStatusRepository, FlightStatusRepository>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IFlightScheduleService, FlightScheduleService>();
+builder.Services.AddScoped<IScheduleImportService, ScheduleImportService>();
+
+builder.Services.Configure<ScheduleImportOptions>(builder.Configuration.GetSection("ScheduleImport"));
 
 builder.Services.AddControllers();
 
