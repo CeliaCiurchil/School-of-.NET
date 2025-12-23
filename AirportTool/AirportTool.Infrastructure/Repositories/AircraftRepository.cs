@@ -59,13 +59,13 @@ namespace AirportTool.Infrastructure.Repositories
             return entity;
         }
 
-        public Task<Aircraft> GetByTailNumberAsync(string tailNumber)
+        public Task<Aircraft?> GetByTailNumberAsync(string tailNumber, CancellationToken ct = default)
         {
             var entity = _context.Aircraft
                 .AsNoTracking()
                 .Where(a => a.TailNumber == tailNumber)
                 .ProjectTo<Aircraft>(_mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(ct);
 
             return entity;
         }

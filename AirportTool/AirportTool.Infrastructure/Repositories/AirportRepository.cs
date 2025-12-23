@@ -59,13 +59,13 @@ namespace AirportTool.Infrastructure.Repositories
             return entity;
         }
 
-        public Task<Airport> GetByIataCodeAsync(string iataCode)
+        public Task<Airport?> GetByIataCodeAsync(string iataCode, CancellationToken ct = default)
         {
             var entity = _context.Airports
                 .AsNoTracking()
                 .Where(a => a.Iatacode == iataCode)
                 .ProjectTo<Airport>(_mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(ct);
             return entity;
         }
 
@@ -82,7 +82,3 @@ namespace AirportTool.Infrastructure.Repositories
         }
     }
 }
-
-
-
-

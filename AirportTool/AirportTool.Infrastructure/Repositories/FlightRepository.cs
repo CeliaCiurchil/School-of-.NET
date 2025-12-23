@@ -56,6 +56,25 @@ namespace AirportTool.Infrastructure.Repositories
                 .ToListAsync(ct);
         }
 
+        public async Task<Flight?> GetByRouteAsync(
+            int airlineId,
+            string flightNumber,
+            int originAirportId,
+            int destinationAirportId,
+            CancellationToken ct = default)
+        {
+            var entity = await _context.Flights
+                .AsNoTracking()
+                .Where(f => f.AirlineId == airlineId &&
+                            f.FlightNumber == flightNumber &&
+                            f.OriginAirportId == originAirportId &&
+                            f.DestinationAirportId == destinationAirportId)
+                .ProjectTo<Flight>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(ct);
+
+            return entity;
+        }
+
         public async Task<Flight> GetByIdAsync(int id, CancellationToken ct = default)
         {
             var entity = await _context.Flights
