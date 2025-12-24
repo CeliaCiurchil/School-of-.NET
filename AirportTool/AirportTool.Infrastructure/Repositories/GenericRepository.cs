@@ -1,4 +1,4 @@
-﻿using AirportTool.Application.Contracts;
+﻿using AirportTool.Application.Contracts.Repositories;
 using AirportTool.Infrastructure.Persistence;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;

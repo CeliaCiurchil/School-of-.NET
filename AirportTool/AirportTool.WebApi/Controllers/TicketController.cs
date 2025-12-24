@@ -1,4 +1,4 @@
-﻿using AirportTool.Application.Contracts;
+﻿using AirportTool.Application.Contracts.Services;
 using AirportTool.Application.ModelDto.Ticket;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

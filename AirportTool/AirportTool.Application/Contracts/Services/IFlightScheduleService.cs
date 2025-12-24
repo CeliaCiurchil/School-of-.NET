@@ -1,6 +1,7 @@
 using AirportTool.Application.ModelDto.FlightSchedule;
+using AirportTool.Application.ModelDto.FlightSchedule.Stats;
 
-namespace AirportTool.Application.Contracts
+namespace AirportTool.Application.Contracts.Services
 {
     public interface IFlightScheduleService
     {

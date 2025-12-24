@@ -1,3 +1,4 @@
+using AirportTool.Application.Contracts.Repositories;
 using System.Diagnostics.Contracts;
 
 namespace AirportTool.Application.Contracts

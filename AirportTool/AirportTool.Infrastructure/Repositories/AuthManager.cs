@@ -1,4 +1,4 @@
-using AirportTool.Application.Contracts;
+using AirportTool.Application.Contracts.Repositories;
 using AirportTool.Application.ModelDto.Users;
 using AirportTool.Infrastructure.Persistence.Identity;
 using AutoMapper;

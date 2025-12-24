@@ -1,4 +1,4 @@
-namespace AirportTool.Application.Contracts
+namespace AirportTool.Application.Contracts.Repositories
 {
     public interface IGateRepository
     {

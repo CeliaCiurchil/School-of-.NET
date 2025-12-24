@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using AirportTool.Application.Contracts;
+using AirportTool.Application.Contracts.Services;
 using AirportTool.Application.ModelDto.Booking;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

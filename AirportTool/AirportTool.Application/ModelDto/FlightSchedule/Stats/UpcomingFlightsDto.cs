@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirportTool.Application.ModelDto.FlightSchedule
+namespace AirportTool.Application.ModelDto.FlightSchedule.Stats
 {
     public class UpcomingFlightsDto
     {

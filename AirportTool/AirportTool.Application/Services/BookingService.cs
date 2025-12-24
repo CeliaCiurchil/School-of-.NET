@@ -1,4 +1,5 @@
 ﻿using AirportTool.Application.Contracts;
+using AirportTool.Application.Contracts.Services;
 using AirportTool.Application.Exceptions;
 using AirportTool.Application.ModelDto.Booking;
 using AirportTool.Application.ModelDto.Flight;
@@ -41,7 +42,6 @@ namespace AirportTool.Application.Services
 
         public async Task<BookingReadDto> CreateAsync(BookingCreateDto dto, CancellationToken ct = default)
         {
-            //take user from loged in user
             var booking = new Booking
             {
                 UserId = dto.UserId,

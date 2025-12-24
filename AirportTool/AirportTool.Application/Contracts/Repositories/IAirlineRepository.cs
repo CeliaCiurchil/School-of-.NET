@@ -1,6 +1,6 @@
 using AirportTool.Domain.Entities;
 
-namespace AirportTool.Application.Contracts
+namespace AirportTool.Application.Contracts.Repositories
 {
     public interface IAirlineRepository : IGenericRepository<Airline>
     {

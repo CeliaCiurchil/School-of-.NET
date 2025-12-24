@@ -1,6 +1,6 @@
 ﻿using AirportTool.Application.ModelDto.Flight;
 
-namespace AirportTool.Application.Contracts
+namespace AirportTool.Application.Contracts.Services
 {
     public interface IFlightService
     {

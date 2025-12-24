@@ -1,4 +1,4 @@
-namespace AirportTool.Application.ModelDto.FlightSchedule
+namespace AirportTool.Application.ModelDto.FlighStatus
 {
     public class FlightStatusDto
     {

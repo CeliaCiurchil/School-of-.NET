@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirportTool.Application.Contracts
+namespace AirportTool.Application.Contracts.Repositories
 {
     public interface ITicketRepository : IGenericRepository<Ticket>
     {

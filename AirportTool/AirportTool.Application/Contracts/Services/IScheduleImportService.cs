@@ -1,6 +1,6 @@
 using AirportTool.Application.ModelDto.FlightSchedule.ScheduleImport;
 
-namespace AirportTool.Application.Contracts
+namespace AirportTool.Application.Contracts.Services
 {
     public interface IScheduleImportService
     {

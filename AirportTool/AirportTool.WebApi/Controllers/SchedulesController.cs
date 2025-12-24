@@ -1,7 +1,8 @@
-using AirportTool.Application.Contracts;
+using AirportTool.Application.Contracts.Services;
 using AirportTool.Application.Exceptions;
 using AirportTool.Application.ModelDto.FlightSchedule;
 using AirportTool.Application.ModelDto.FlightSchedule.ScheduleImport;
+using AirportTool.Application.ModelDto.FlightSchedule.Stats;
 using AirportTool.Application.Options;
 using AirportTool.WebApi.Models;
 using Microsoft.AspNetCore.Authorization;

@@ -1,4 +1,4 @@
-﻿using AirportTool.Application.Contracts;
+﻿using AirportTool.Application.Contracts.Repositories;
 using HotelListing.API.Models.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,7 +1,7 @@
 using AirportTool.Domain.Entities;
 using System;
 
-namespace AirportTool.Application.Contracts
+namespace AirportTool.Application.Contracts.Repositories
 {
     public interface IFlightScheduleRepository : IGenericRepository<FlightSchedule>
     {

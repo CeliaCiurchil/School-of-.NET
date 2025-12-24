@@ -1,6 +1,10 @@
+using AirportTool.Application.ModelDto.Aircraft;
 using AirportTool.Application.ModelDto.Booking;
+using AirportTool.Application.ModelDto.FlighStatus;
 using AirportTool.Application.ModelDto.Flight;
 using AirportTool.Application.ModelDto.FlightSchedule;
+using AirportTool.Application.ModelDto.FlightSchedule.Stats;
+using AirportTool.Application.ModelDto.Gate;
 using AirportTool.Application.ModelDto.Ticket;
 using AirportTool.Domain.Entities;
 using AutoMapper;

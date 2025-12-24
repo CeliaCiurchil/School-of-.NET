@@ -1,3 +1,7 @@
+using AirportTool.Application.ModelDto.Aircraft;
+using AirportTool.Application.ModelDto.FlighStatus;
+using AirportTool.Application.ModelDto.Gate;
+
 namespace AirportTool.Application.ModelDto.FlightSchedule
 {
     public class FlightScheduleReadDto : BaseFlightScheduleDto

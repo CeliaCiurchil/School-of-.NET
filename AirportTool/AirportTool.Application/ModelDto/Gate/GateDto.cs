@@ -1,4 +1,4 @@
-namespace AirportTool.Application.ModelDto.FlightSchedule
+namespace AirportTool.Application.ModelDto.Gate
 {
     public class GateDto
     {
