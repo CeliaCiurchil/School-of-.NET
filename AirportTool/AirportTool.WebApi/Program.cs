@@ -40,12 +40,15 @@ builder.Services.AddScoped<IAirlineRepository, AirlineRepository>();
 builder.Services.AddScoped<IAirportRepository, AirportRepository>();
 builder.Services.AddScoped<IGateRepository, GateRepository>();
 builder.Services.AddScoped<IFlightStatusRepository, FlightStatusRepository>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IFlightScheduleService, FlightScheduleService>();
 builder.Services.AddScoped<IScheduleImportService, ScheduleImportService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
 
 builder.Services.Configure<ScheduleImportOptions>(builder.Configuration.GetSection("ScheduleImport"));
 
