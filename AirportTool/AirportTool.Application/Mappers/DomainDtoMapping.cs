@@ -1,3 +1,4 @@
+using AirportTool.Application.ModelDto.Booking;
 using AirportTool.Application.ModelDto.Flight;
 using AirportTool.Application.ModelDto.FlightSchedule;
 using AirportTool.Domain.Entities;
@@ -21,6 +22,8 @@ namespace AirportTool.Application.Mappers
             
             CreateMap<FlightScheduleBasicInfo, FlightScheduleBasicInfoDto>();
             CreateMap<UpcomingFlights, UpcomingFlightsDto>();
+
+            CreateMap<Booking, BookingReadDto>().ReverseMap();
         }
     }
 }
