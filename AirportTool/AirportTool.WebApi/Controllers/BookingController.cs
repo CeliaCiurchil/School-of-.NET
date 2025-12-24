@@ -1,6 +1,7 @@
-﻿using AirportTool.Application.Contracts;
+using System.Security.Claims;
+using AirportTool.Application.Contracts;
 using AirportTool.Application.ModelDto.Booking;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirportTool.WebApi.Controllers
@@ -17,9 +18,16 @@ namespace AirportTool.WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<BookingReadDto>> Create(CancellationToken ct)
         {
-            var createDto = new BookingCreateDto() { UserId = 1 };
+            var userId = User.FindFirstValue("uid");
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                return Unauthorized();
+            }
+
+            var createDto = new BookingCreateDto() { UserId = userId };
             var booking = await _bookingService.CreateAsync(createDto, ct);
             return CreatedAtAction(nameof(GetByConfirmationCode), new { confirmationCode = booking.ConfirmationCode }, booking);
         }
