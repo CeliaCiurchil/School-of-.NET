@@ -16,6 +16,10 @@ using FlightStatus = AirportTool.Domain.Entities.FlightStatus;
 using FlightStatusDb = AirportTool.Infrastructure.Persistence.Entities.FlightStatus;
 using Gate = AirportTool.Domain.Entities.Gate;
 using GateDb = AirportTool.Infrastructure.Persistence.Entities.Gate;
+using Booking = AirportTool.Domain.Entities.Booking;
+using BookingDb = AirportTool.Infrastructure.Persistence.Entities.Booking;
+using Ticket = AirportTool.Domain.Entities.Ticket;
+using TicketDb = AirportTool.Infrastructure.Persistence.Entities.Ticket;
 
 namespace AirportTool.Infrastructure.Mappers
 {
@@ -31,6 +35,8 @@ namespace AirportTool.Infrastructure.Mappers
             CreateMap<Aircraft, AircraftDb>().ReverseMap();
             CreateMap<Airline, AirlineDb>().ReverseMap();
             CreateMap<Airport, AirportDb>().ReverseMap();
+            CreateMap<Booking, BookingDb>().ReverseMap();
+            CreateMap<Ticket, TicketDb>().ReverseMap();
             CreateMap<FlightScheduleDb, FlightScheduleBasicInfo>()
                 .ForMember(dest => dest.ScheduleId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.FlightNumber, opt => opt.MapFrom(src => src.Flight.FlightNumber))

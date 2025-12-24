@@ -58,7 +58,7 @@ namespace AirportTool.Application.Services
             return _mapper.Map<FlightReadDto>(created);
         }
 
-        public async Task<FlightReadDto?> UpdateAsync(int id, FlightUpdateDto dto, CancellationToken ct = default)
+        public async Task<FlightReadDto?> UpdateAsync(int id, FlightUpdateDto dto, CancellationToken ct)
         {
             var existing = await _unitOfWork.Flights.GetByIdAsync(id, ct);
             if (existing is null)
