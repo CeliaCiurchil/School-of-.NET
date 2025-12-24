@@ -1,3 +1,5 @@
+using System.Diagnostics.Contracts;
+
 namespace AirportTool.Application.Contracts
 {
     public interface IUnitOfWork
@@ -10,6 +12,7 @@ namespace AirportTool.Application.Contracts
         public IGateRepository Gates { get; }
         public IFlightStatusRepository FlightStatuses { get; }
         public IBookingRepository Bookings { get; }
+        public ITicketRepository Tickets { get; }
         public Task<int> SaveChangesAsync();
     }
 }
