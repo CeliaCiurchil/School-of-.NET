@@ -1,5 +1,6 @@
 ﻿using AirportTool.Application.Contracts;
 using AirportTool.Application.ModelDto.Ticket;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace AirportTool.WebApi.Controllers
             _ticketService = ticketService;
         }
 
+        [Authorize(Roles = "Client")]
         [HttpPost]
         public async Task<ActionResult<TicketReadDto>> CreateTicket(TicketCreateDto createDto, CancellationToken ct)
         {
@@ -23,6 +25,7 @@ namespace AirportTool.WebApi.Controllers
             return CreatedAtAction(nameof(GetTicketById), new { id = ticket.Id }, ticket);
         }
 
+        [Authorize(Roles = "Client")]
         [HttpGet("{id}")]
         public async Task<ActionResult<TicketReadDto>> GetTicketById(int id, CancellationToken ct)
         {
@@ -34,6 +37,7 @@ namespace AirportTool.WebApi.Controllers
             return Ok(ticket);
         }
 
+        [Authorize(Roles = "Client")]
         [HttpGet("by-flight/{flightId}")]
         public async Task<ActionResult<IEnumerable<TicketReadDto>>> GetTicketsByFlight(int flightId, CancellationToken ct)
         {
@@ -41,6 +45,7 @@ namespace AirportTool.WebApi.Controllers
             return Ok(tickets);
         }
 
+        [Authorize(Roles = "Client")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTicket(int id, CancellationToken ct)
         {

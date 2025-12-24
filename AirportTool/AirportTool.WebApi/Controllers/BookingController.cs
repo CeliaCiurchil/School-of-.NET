@@ -18,7 +18,7 @@ namespace AirportTool.WebApi.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Client")]
         public async Task<ActionResult<BookingReadDto>> Create(CancellationToken ct)
         {
             var userId = User.FindFirstValue("uid");
@@ -32,13 +32,15 @@ namespace AirportTool.WebApi.Controllers
             return CreatedAtAction(nameof(GetByConfirmationCode), new { confirmationCode = booking.ConfirmationCode }, booking);
         }
 
+        [Authorize(Roles = "Client")]
         [HttpGet("{confirmationCode}")]
         public async Task<ActionResult<BookingReadDto>> GetByConfirmationCode(string confirmationCode, CancellationToken ct)
         {
             var booking = await _bookingService.GetByConfirmationAsync(confirmationCode, ct);
             return Ok(booking);
         }
-        
+
+        [Authorize(Roles = "Client")]
         [HttpDelete("{confirmationCode}")]    
         public async Task<IActionResult> Cancel(string confirmationCode, CancellationToken ct)
         {

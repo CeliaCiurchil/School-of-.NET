@@ -4,6 +4,7 @@ using AirportTool.Application.ModelDto.FlightSchedule;
 using AirportTool.Application.ModelDto.FlightSchedule.ScheduleImport;
 using AirportTool.Application.Options;
 using AirportTool.WebApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -27,6 +28,7 @@ namespace AirportTool.WebApi.Controllers
             _importOptions = importOptions.Value;
         }
 
+        [Authorize(Roles = "Client")]
         [HttpGet("{id}")]
         public async Task<ActionResult<FlightScheduleReadDto>> GetById(int id, CancellationToken ct)
         {
@@ -34,6 +36,7 @@ namespace AirportTool.WebApi.Controllers
             return Ok(schedule);
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpPost]
         public async Task<ActionResult<FlightScheduleReadDto>> Create(FlightScheduleCreateDto dto, CancellationToken ct)
         {
@@ -41,6 +44,7 @@ namespace AirportTool.WebApi.Controllers
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpPost("import")]
         [Consumes("multipart/form-data")]
         public async Task<ActionResult<ScheduleImportSummaryDto>> ImportFlightSchedules(
@@ -77,6 +81,7 @@ namespace AirportTool.WebApi.Controllers
             }
         }
 
+        [Authorize(Roles = "Client")]
         [HttpGet("stats/upcoming/{days}")]
         public async Task<ActionResult<IEnumerable<UpcomingFlightsDto>>> GetFlightStats(int days, CancellationToken ct)
         {

@@ -1,6 +1,7 @@
 ﻿using AirportTool.Application.Contracts;
 using AirportTool.Application.ModelDto.Flight;
 using AirportTool.Application.ModelDto.FlightSchedule;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ namespace AirportTool.WebApi.Controllers
         }
 
         // GET: api/Flights
+        [Authorize(Roles = "Client")]
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<FlightReadDto>>> GetAll(CancellationToken ct)
         {
@@ -27,6 +29,7 @@ namespace AirportTool.WebApi.Controllers
             return Ok(flights);
         }
 
+        [Authorize(Roles = "Client")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FlightScheduleBasicInfoDto>>> GetFlightInfos(
             [FromQuery(Name = "origin")] string? originAirport,
@@ -50,6 +53,7 @@ namespace AirportTool.WebApi.Controllers
         }
 
         // GET: api/Flights/5
+        [Authorize(Roles = "Client")]
         [HttpGet("{id}")]
         public async Task<ActionResult<FlightReadDto>> GetById(int id, CancellationToken ct)
         {
@@ -57,6 +61,7 @@ namespace AirportTool.WebApi.Controllers
             return Ok(flight);
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpPost]
         public async Task<ActionResult<FlightReadDto>> Create(FlightCreateDto dto, CancellationToken ct)
         {
@@ -64,6 +69,7 @@ namespace AirportTool.WebApi.Controllers
             return CreatedAtAction(nameof(GetById), new { id = createdFlight.Id }, createdFlight);
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpPut("{id}")]
         public async Task<ActionResult<FlightReadDto>> Update(int id, FlightUpdateDto dto, CancellationToken ct)
         {
@@ -72,6 +78,7 @@ namespace AirportTool.WebApi.Controllers
             return Ok(updated);
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id, CancellationToken ct)
         {
