@@ -1,6 +1,7 @@
 using AirportTool.Application.ModelDto.Booking;
 using AirportTool.Application.ModelDto.Flight;
 using AirportTool.Application.ModelDto.FlightSchedule;
+using AirportTool.Application.ModelDto.Ticket;
 using AirportTool.Domain.Entities;
 using AutoMapper;
 
@@ -24,6 +25,9 @@ namespace AirportTool.Application.Mappers
             CreateMap<UpcomingFlights, UpcomingFlightsDto>();
 
             CreateMap<Booking, BookingReadDto>().ReverseMap();
+            CreateMap<Ticket,TicketCreateDto>().ReverseMap();
+            CreateMap<Ticket, TicketReadDto>().ReverseMap();
+            CreateMap<Ticket, TicketUpdateDto>().ReverseMap();
         }
     }
 }
