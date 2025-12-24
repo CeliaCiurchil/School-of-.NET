@@ -1,5 +1,7 @@
 using AirportTool.Domain.Entities;
+using AirportTool.Infrastructure.Persistence.Identity;
 using AutoMapper;
+using HotelListing.API.Models.Users;
 using Address = AirportTool.Domain.Entities.Address;
 using AddressDb = AirportTool.Infrastructure.Persistence.Entities.Address;
 using Aircraft = AirportTool.Domain.Entities.Aircraft;
@@ -8,6 +10,8 @@ using Airline = AirportTool.Domain.Entities.Airline;
 using AirlineDb = AirportTool.Infrastructure.Persistence.Entities.Airline;
 using Airport = AirportTool.Domain.Entities.Airport;
 using AirportDb = AirportTool.Infrastructure.Persistence.Entities.Airport;
+using Booking = AirportTool.Domain.Entities.Booking;
+using BookingDb = AirportTool.Infrastructure.Persistence.Entities.Booking;
 using Flight = AirportTool.Domain.Entities.Flight;
 using FlightDb = AirportTool.Infrastructure.Persistence.Entities.Flight;
 using FlightSchedule = AirportTool.Domain.Entities.FlightSchedule;
@@ -16,8 +20,6 @@ using FlightStatus = AirportTool.Domain.Entities.FlightStatus;
 using FlightStatusDb = AirportTool.Infrastructure.Persistence.Entities.FlightStatus;
 using Gate = AirportTool.Domain.Entities.Gate;
 using GateDb = AirportTool.Infrastructure.Persistence.Entities.Gate;
-using Booking = AirportTool.Domain.Entities.Booking;
-using BookingDb = AirportTool.Infrastructure.Persistence.Entities.Booking;
 using Ticket = AirportTool.Domain.Entities.Ticket;
 using TicketDb = AirportTool.Infrastructure.Persistence.Entities.Ticket;
 
@@ -27,6 +29,7 @@ namespace AirportTool.Infrastructure.Mappers
     {
         public DomainEntityMapping()
         {
+            CreateMap<ApiUser, ApiUserDto>().ReverseMap();
             CreateMap<Address, AddressDb>().ReverseMap();
             CreateMap<Flight, FlightDb>().ReverseMap();
             CreateMap<FlightScheduleDb, FlightSchedule>().ReverseMap();
