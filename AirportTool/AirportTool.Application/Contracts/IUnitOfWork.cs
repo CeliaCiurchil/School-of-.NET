@@ -9,6 +9,7 @@ namespace AirportTool.Application.Contracts
         public IAirportRepository Airports { get; }
         public IGateRepository Gates { get; }
         public IFlightStatusRepository FlightStatuses { get; }
+        public IBookingRepository Bookings { get; }
         public Task<int> SaveChangesAsync();
     }
 }
