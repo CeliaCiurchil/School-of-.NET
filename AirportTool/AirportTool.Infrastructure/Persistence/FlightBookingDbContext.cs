@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using AirportTool.Infrastructure.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -37,8 +37,6 @@ public partial class FlightBookingDbContext : DbContext
     public virtual DbSet<Gate> Gates { get; set; }
 
     public virtual DbSet<Ticket> Tickets { get; set; }
-
-    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -104,15 +102,12 @@ public partial class FlightBookingDbContext : DbContext
             entity.Property(e => e.ConfirmationCode).HasMaxLength(8);
             entity.Property(e => e.CreatedUtc).HasDefaultValueSql("(sysutcdatetime())");
 
+            entity.Property(e => e.UserId).HasMaxLength(450);
+
             entity.HasOne(d => d.BookingStatus).WithMany(p => p.Bookings)
                 .HasForeignKey(d => d.BookingStatusId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Booking_BookingStatus");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Bookings)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Booking_User");
         });
 
         modelBuilder.Entity<BookingStatus>(entity =>
@@ -229,18 +224,9 @@ public partial class FlightBookingDbContext : DbContext
                 .HasConstraintName("FK_Ticket_FlightSchedule");
         });
 
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.ToTable("User");
-
-            entity.HasIndex(e => e.Email, "UQ_User_Email").IsUnique();
-
-            entity.Property(e => e.Email).HasMaxLength(120);
-            entity.Property(e => e.Name).HasMaxLength(120);
-        });
-
         OnModelCreatingPartial(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
+
