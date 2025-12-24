@@ -49,6 +49,8 @@ builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IFlightScheduleService, FlightScheduleService>();
 builder.Services.AddScoped<IScheduleImportService, ScheduleImportService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
+builder.Services.AddScoped<ITicketService, TicketService>();
+builder.Services.AddScoped<IPricingService, PricingService>();
 
 builder.Services.Configure<ScheduleImportOptions>(builder.Configuration.GetSection("ScheduleImport"));
 
