@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ namespace AirportTool.Application.ModelDto.Booking
 {
     public class BaseBookingDto
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; } = null!;
 
         public int BookingStatusId { get; set; }
 
@@ -19,3 +19,4 @@ namespace AirportTool.Application.ModelDto.Booking
         public int Quantity { get; set; }
     }
 }
+

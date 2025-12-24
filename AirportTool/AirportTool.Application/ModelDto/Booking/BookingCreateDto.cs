@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +8,7 @@ namespace AirportTool.Application.ModelDto.Booking
 {
     public class BookingCreateDto
     {
-        public int UserId { get; set; }  
+        public string UserId { get; set; } = null!;  
     }
 }
+

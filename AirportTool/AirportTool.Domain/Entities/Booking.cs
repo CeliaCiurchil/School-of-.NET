@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +10,7 @@ namespace AirportTool.Domain.Entities
     {
         public long Id { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; } = null!;
 
         public int BookingStatusId { get; set; }
 
@@ -22,3 +22,4 @@ namespace AirportTool.Domain.Entities
 
     }
 }
+
