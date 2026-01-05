@@ -21,5 +21,9 @@
     <ProjectReference Include="..\AirportTool.Domain\AirportTool.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SqlScripts\" />
+  </ItemGroup>
+
 </Project>
 
