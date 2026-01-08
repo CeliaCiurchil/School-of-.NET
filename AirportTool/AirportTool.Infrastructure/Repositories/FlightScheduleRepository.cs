@@ -175,5 +175,15 @@ namespace AirportTool.Infrastructure.Repositories
 
             return hasOverlap;
         }
+
+        public Task<int?> GetSeatCapacityAsync(int flightScheduleId, CancellationToken ct = default)
+        {
+            return _context.FlightSchedules
+                .AsNoTracking()
+                .Where(fs => fs.Id == flightScheduleId)
+                .Select(fs => fs.AssignedAircraft != null ? (int?)fs.AssignedAircraft.SeatCapacity : null)
+                .FirstOrDefaultAsync(ct);
+        }
+
     }
 }

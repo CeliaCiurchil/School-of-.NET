@@ -10,5 +10,6 @@ namespace AirportTool.Application.Contracts.Repositories
     public interface ITicketRepository : IGenericRepository<Ticket>
     {
         Task<IEnumerable<Ticket>> GetByFlightIdAsync(int flightId, CancellationToken ct = default);
+        Task<int> CountByFlightScheduleIdAsync(int flightScheduleId, CancellationToken ct = default);
     }
 }

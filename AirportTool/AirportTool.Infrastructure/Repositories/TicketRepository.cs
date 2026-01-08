@@ -27,6 +27,11 @@ namespace AirportTool.Infrastructure.Repositories
             return _mapper.Map<Ticket>(dbEntity);
         }
 
+        public async Task<int> CountByFlightScheduleIdAsync(int flightScheduleId, CancellationToken ct = default)
+        {
+            return await _context.Tickets.AsNoTracking().CountAsync(t => t.FlightScheduleId == flightScheduleId, ct);
+        }
+
         public async Task DeleteAsync(int id, CancellationToken ct = default)
         {
             var ticketId = (long)id;

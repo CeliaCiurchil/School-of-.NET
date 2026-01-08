@@ -30,5 +30,6 @@ namespace AirportTool.Application.Contracts.Repositories
             int flightId,
             DateTime scheduledDepartureUtc,
             CancellationToken ct = default);
+        Task<int?> GetSeatCapacityAsync(int flightScheduleId, CancellationToken ct = default);
     }
 }

@@ -28,6 +28,15 @@ namespace AirportTool.Application.Services
 
         public async Task<TicketReadDto> CreateAsync(TicketCreateDto createDto, CancellationToken ct = default)
         {
+            var capacity = await _unitOfWork.FlightSchedules.GetSeatCapacityAsync(createDto.FlightScheduleId, ct);
+            if (capacity is null)
+                throw new BadRequestException("Flight schedule has no aircraft assigned, cannot sell tickets.");
+
+            var sold = await _unitOfWork.Tickets.CountByFlightScheduleIdAsync(createDto.FlightScheduleId, ct);
+
+            if (sold + 1 > capacity)
+                throw new BadRequestException("No seats available for this flight.");
+
             var prices = await _pricingService.PriceTicketAsync(
                 new PriceTicketRequest(
                     FareClass: createDto.FareClass[0]
