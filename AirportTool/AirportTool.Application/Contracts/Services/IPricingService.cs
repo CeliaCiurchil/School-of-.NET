@@ -10,7 +10,6 @@ namespace AirportTool.Application.Contracts.Services
     {
         Task<PriceBreakdown> PriceTicketAsync(PriceTicketRequest request, CancellationToken ct = default);
     }
-
     public sealed record PriceTicketRequest(
         char FareClass
     );
