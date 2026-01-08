@@ -34,7 +34,6 @@ namespace AirportTool.Application.Validators.FlightSchedule
                 .Must(id => id is null || id > 0)
                 .WithMessage("AssignedAircraftId must be null or a positive integer.");
 
-            // StatusId is a tinyint enum in the brief (0..4). Your model uses int, so validate range.
             RuleFor(x => x.StatusId)
                 .InclusiveBetween(0, 4)
                 .WithMessage("StatusId must be between 0 and 4 (Planned=0, Boarding=1, Departed=2, Cancelled=3, Delayed=4).");

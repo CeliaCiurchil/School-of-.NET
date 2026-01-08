@@ -44,7 +44,6 @@ builder.Services.AddDbContext<ApplicationIdentityDbContext>(options => {
     }
 });
 
-// Add Data Protection services before Identity
 builder.Services.AddDataProtection();
 
 builder.Services.AddIdentityCore<ApiUser>()
@@ -54,7 +53,6 @@ builder.Services.AddIdentityCore<ApiUser>()
 
 builder.Services.AddAuthorization();
 
-//AutoMapper Configurations
 builder.Services.AddAutoMapper(ctx =>
 {
 

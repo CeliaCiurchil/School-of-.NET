@@ -37,7 +37,7 @@ namespace AirportTool.Application.Services
 
             var overlappingSchedules = await _unitOfWork.FlightSchedules
                 .HasGateOverlapAsync(
-                    schedule.FlightId,
+                    dto.GateId.Value,
                     schedule.ScheduledDepartureUtc,
                     bufferMinutes,
                     ct);

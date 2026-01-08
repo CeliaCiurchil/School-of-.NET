@@ -17,7 +17,7 @@ namespace AirportTool.WebApi.Controllers
             _logger = logger;
         }
 
-        [HttpPost] //multiple posts
+        [HttpPost] 
         [Route("login")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -56,7 +56,7 @@ namespace AirportTool.WebApi.Controllers
                 {
                     foreach (var error in response.Errors)
                     {
-                        ModelState.AddModelError(error.Code, error.Description); //what handles the error, modelstate carries the text of error when bad request for example
+                        ModelState.AddModelError(error.Code, error.Description); 
                     }
                     return BadRequest(ModelState);
                 }
@@ -68,6 +68,5 @@ namespace AirportTool.WebApi.Controllers
                 return Problem($"Somntheing went wrong in {nameof(Register)}", statusCode: 500);
             }
         }
-        
     }
 }

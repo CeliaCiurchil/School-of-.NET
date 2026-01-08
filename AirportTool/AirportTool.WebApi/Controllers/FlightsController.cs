@@ -20,7 +20,6 @@ namespace AirportTool.WebApi.Controllers
             _flightScheduleService = flightScheduleService;
         }
 
-        // GET: api/Flights
         [Authorize(Roles = "Client")]
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<FlightReadDto>>> GetAll(CancellationToken ct)
@@ -52,7 +51,6 @@ namespace AirportTool.WebApi.Controllers
             return Ok(schedules);
         }
 
-        // GET: api/Flights/5
         [Authorize(Roles = "Client")]
         [HttpGet("{id}")]
         public async Task<ActionResult<FlightReadDto>> GetById(int id, CancellationToken ct)
