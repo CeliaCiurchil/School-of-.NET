@@ -21,6 +21,16 @@ namespace AirportTool.WebApi.Tests
         private readonly Mock<IFlightScheduleService> flightScheduleService = new();
         private readonly Mock<IScheduleImportService> scheduleImportService = new();
 
+        private readonly SchedulesController controller;
+
+        public SchedulesControllerTests()
+        {
+            controller = new SchedulesController(
+                            flightScheduleService.Object,
+                            scheduleImportService.Object,
+                            CreateImportOptions());
+        }
+
         private static IOptions<ScheduleImportOptions> CreateImportOptions()
         {
             return Microsoft.Extensions.Options.Options.Create(new ScheduleImportOptions
@@ -35,23 +45,13 @@ namespace AirportTool.WebApi.Tests
             var bytes = Encoding.UTF8.GetBytes(json);
             var stream = new MemoryStream(bytes);
 
-            // FormFile needs a stream + length + name + fileName
-            return new FormFile(stream, 0, bytes.Length, "file", fileName)
-            {
-                Headers = new HeaderDictionary(),
-                ContentType = "application/json"
-            };
+            return new FormFile(stream, 0, bytes.Length, "file", fileName);
         }
 
         [Fact]
         public async Task ImportFlightSchedules_SomeRowsFail_Returns207MultiStatus()
         {
             // Arrange
-            var controller = new SchedulesController(
-                flightScheduleService.Object,
-                scheduleImportService.Object,
-                CreateImportOptions());
-
             var file = CreateJsonFormFile(@"[{""flightNumber"":""RO391""}]");
             var request = new FileImportRequest { File = file };
 
@@ -70,7 +70,7 @@ namespace AirportTool.WebApi.Tests
             // Act
             var result = await controller.ImportFlightSchedules(request, CancellationToken.None);
 
-            // Assert: StatusCode(207, summary)
+            // Assert
             var objectResult = Assert.IsType<ObjectResult>(result.Result);
             Assert.Equal(StatusCodes.Status207MultiStatus, objectResult.StatusCode);
 
@@ -87,11 +87,6 @@ namespace AirportTool.WebApi.Tests
         public async Task ImportFlightSchedules_AllRowsCreated_Returns201Created()
         {
             // Arrange
-            var controller = new SchedulesController(
-                flightScheduleService.Object,
-                scheduleImportService.Object,
-                CreateImportOptions());
-
             var file = CreateJsonFormFile(@"[
               {""flightNumber"":""RO391"",""airlineIata"":""RO"",""originIata"":""OTP"",""destinationIata"":""LHR"",
                ""scheduledDepartureUtc"":""2025-12-01T06:30:00Z"",""scheduledArrivalUtc"":""2025-12-01T08:25:00Z""}

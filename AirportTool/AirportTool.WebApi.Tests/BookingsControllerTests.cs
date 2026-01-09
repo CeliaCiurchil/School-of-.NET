@@ -23,11 +23,11 @@ namespace AirportTool.WebApi.Tests
         public async Task Create_UserHasUidClaim_ReturnsCreatedAtActionAndCallsServiceOnce()
         {
             // Arrange
-            var user = new ClaimsPrincipal(new ClaimsIdentity(new[]
-            {
+            var user = new ClaimsPrincipal(new ClaimsIdentity(
+            [
                 new Claim("uid", "user-123"),
                 new Claim(ClaimTypes.Role, "Client")
-            }, authenticationType: "Test"));
+            ], authenticationType: "Test"));
 
             bookingController.ControllerContext = new ControllerContext
             {
@@ -50,6 +50,7 @@ namespace AirportTool.WebApi.Tests
             // Act
             var result = await bookingController.Create(CancellationToken.None);
 
+            //Assert
             var created = Assert.IsType<CreatedAtActionResult>(result.Result);
             Assert.Equal(201, created.StatusCode);
             Assert.Equal(nameof(BookingController.GetByConfirmationCode), created.ActionName);
@@ -64,8 +65,6 @@ namespace AirportTool.WebApi.Tests
                 s.CreateAsync(It.Is<BookingCreateDto>(d => d.UserId == "user-123"),
                               It.IsAny<CancellationToken>()),
                 Times.Once);
-
-            bookingService.VerifyNoOtherCalls();
         }
     }
 

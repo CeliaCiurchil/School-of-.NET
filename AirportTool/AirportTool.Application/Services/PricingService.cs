@@ -11,7 +11,6 @@ namespace AirportTool.Application.Services
     {
             public Task<PriceBreakdown> PriceTicketAsync(PriceTicketRequest request, CancellationToken ct = default)
             {
-                // super basic rules: base by class, taxes = 10% of base + fixed fee
                 var fareClass = char.ToUpperInvariant(request.FareClass);
                 var basePrice = fareClass switch
                 {
