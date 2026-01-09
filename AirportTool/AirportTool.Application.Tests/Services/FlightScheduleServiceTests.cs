@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace AirportTool.Application.Tests
+namespace AirportTool.Application.Tests.Services
 {
     public class FlightScheduleServiceTests
     {
@@ -39,8 +39,6 @@ namespace AirportTool.Application.Tests
         {
             // Arrange
             var ct = CancellationToken.None;
-
-            unitOfWork.Setup(u => u.FlightSchedules).Returns(flightScheduleRepo.Object);
 
             var dto = new FlightScheduleCreateDto
             {
@@ -136,8 +134,7 @@ namespace AirportTool.Application.Tests
             flightScheduleRepo.Verify(r => r.AddAsync(mappedSchedule, ct), Times.Once);
             mapper.Verify(m => m.Map<FlightScheduleReadDto>(createdSchedule), Times.Once);
         }
-
-
+        
         [Fact]
         public async Task GetByIdAsync_ScheduleExists_ReturnsMappedDto()
         {
@@ -201,7 +198,7 @@ namespace AirportTool.Application.Tests
         }
 
         [Fact]
-        public async Task GetFlightStats_CallsRepoAndReturnsMappedDtos()
+        public async Task GetFlightStats_ValidInput_CallsRepoAndReturnsMappedDtos()
         {
             // Arrange
             var ct = CancellationToken.None;

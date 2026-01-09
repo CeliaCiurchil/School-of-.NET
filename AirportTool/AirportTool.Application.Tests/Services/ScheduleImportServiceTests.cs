@@ -17,7 +17,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
-namespace AirportTool.Application.Tests
+namespace AirportTool.Application.Tests.Services
 {
     public class ScheduleImportServiceTests
     {

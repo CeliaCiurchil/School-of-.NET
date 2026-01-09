@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace AirportTool.Application.Tests
+namespace AirportTool.Application.Tests.Services
 {
     public class TicketServiceTests
     {
