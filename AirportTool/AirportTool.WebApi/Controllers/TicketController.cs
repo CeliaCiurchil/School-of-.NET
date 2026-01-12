@@ -30,10 +30,7 @@ namespace AirportTool.WebApi.Controllers
         public async Task<ActionResult<TicketReadDto>> GetTicketById(int id, CancellationToken ct)
         {
             var ticket = await _ticketService.GetByIdAsync(id, ct);
-            if (ticket == null)
-            {
-                return NotFound();
-            }
+
             return Ok(ticket);
         }
 
