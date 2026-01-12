@@ -1,0 +1,15 @@
+using AirportTool.Domain.Entities;
+
+namespace AirportTool.Application.Contracts.Repositories
+{
+    public interface IFlightRepository : IGenericRepository<Flight>
+    {
+        Task<bool> ExistsByAirlineAndNumberAsync(int airlineId, string flightNumber, CancellationToken ct = default);
+        Task<Flight?> GetByRouteAsync(
+            int airlineId,
+            string flightNumber,
+            int originAirportId,
+            int destinationAirportId,
+            CancellationToken ct = default);
+    }
+}
