@@ -171,31 +171,82 @@ namespace AirportTool.Application.Tests.Services
             mapper.Verify(m => m.Map<FlightScheduleReadDto>(It.IsAny<FlightSchedule>()), Times.Never);
         }
 
-        [Fact]
-        public async Task FindByRouteAndDateAsync_OriginIsEmpty_ThrowsBadRequestException()
+        [Theory]
+        [InlineData("", "LHR")]      
+        [InlineData("   ", "LHR")]
+        [InlineData("OTP", "")]      
+        [InlineData("OTP", "   ")]   
+        public async Task FindByRouteAndDateAsync_EmptyOriginOrDestination_ThrowsBadRequestException(string origin, string destination)
         {
             // Arrange
             var ct = CancellationToken.None;
+            var date = DateTime.UtcNow;
 
             // Act & Assert
             await Assert.ThrowsAsync<BadRequestException>(() =>
-                flightScheduleService.FindByRouteAndDateAsync("", "LHR", DateTime.UtcNow, ct));
+                flightScheduleService.FindByRouteAndDateAsync(origin, destination, date, ct));
 
-            flightScheduleRepo.Verify(r => r.FindByRouteAndDateAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTime>(), It.IsAny<CancellationToken>()), Times.Never);
+            flightScheduleRepo.Verify(
+                r => r.FindByRouteAndDateAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTime>(), It.IsAny<CancellationToken>()),
+                Times.Never);
         }
 
         [Fact]
-        public async Task FindByRouteAndDateAsync_DestinationIsEmpty_ThrowsBadRequestException()
+        public async Task FindByRouteAndDateAsync_ValidInputs_ReturnsMappedDtos()
         {
             // Arrange
             var ct = CancellationToken.None;
+            var origin = "OTP";
+            var destination = "LHR";
+            var date = new DateTime(2025, 12, 01, 00, 00, 00, DateTimeKind.Utc);
 
-            // Act & Assert
-            await Assert.ThrowsAsync<BadRequestException>(() =>
-                flightScheduleService.FindByRouteAndDateAsync("OTP", "   ", DateTime.UtcNow, ct));
+            var repoResult = new List<FlightScheduleBasicInfo>
+            {
+                new FlightScheduleBasicInfo
+                {
+                    ScheduleId = 1,
+                    FlightId = 101,
+                    FlightNumber = "RO391",
+                    AirlineCode = "RO",
+                    OriginAirportCode = origin,
+                    DestinationAirportCode = destination,
+                    ScheduledDepartureUtc = date.AddHours(11),
+                    ScheduledArrivalUtc = date.AddHours(13)
+                }
+            };
 
-            flightScheduleRepo.Verify(r => r.FindByRouteAndDateAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTime>(), It.IsAny<CancellationToken>()), Times.Never);
+            var expectedDtos = new List<FlightScheduleBasicInfoDto>
+            {
+                new FlightScheduleBasicInfoDto
+                {
+                    ScheduleId = 1,
+                    FlightId = 101,
+                    FlightNumber = "RO391",
+                    AirlineCode = "RO",
+                    OriginAirportCode = origin,
+                    DestinationAirportCode = destination,
+                    ScheduledDepartureUtc = date.AddHours(11),
+                    ScheduledArrivalUtc = date.AddHours(13)
+                }
+            };
+
+            flightScheduleRepo
+                .Setup(r => r.FindByRouteAndDateAsync(origin, destination, date, ct))
+                .ReturnsAsync(repoResult);
+
+            mapper
+                .Setup(m => m.Map<IEnumerable<FlightScheduleBasicInfoDto>>(repoResult))
+                .Returns(expectedDtos);
+
+            // Act
+            var result = await flightScheduleService.FindByRouteAndDateAsync(origin, destination, date, ct);
+
+            // Assert
+            Assert.Same(expectedDtos, result);
+            flightScheduleRepo.Verify(r => r.FindByRouteAndDateAsync(origin, destination, date, ct), Times.Once);
+            mapper.Verify(m => m.Map<IEnumerable<FlightScheduleBasicInfoDto>>(repoResult), Times.Once);
         }
+
 
         [Fact]
         public async Task GetFlightStats_ValidInput_CallsRepoAndReturnsMappedDtos()
