@@ -23,6 +23,7 @@ namespace AirportTool.Application.Validators.Ticket
             RuleFor(x => x.FareClass)
                 .NotEmpty()
                 .MaximumLength(2) 
+                .NotNull()
                 .Must(fc =>
                 {
                     var normalized = fc.Trim().ToUpperInvariant();
